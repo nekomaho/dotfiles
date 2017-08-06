@@ -4,11 +4,11 @@ set number
 set shiftwidth=2 " auto indent width
 set autoread     " auto reload
 set cursorline   " highlight current line
-set cursorcolumn " highlight current cuolumn
+set cursorcolumn " highlight current column
 set showmatch    " the cursor will briefly jump to the matching brace when you insert onef
 set matchtime=1  " showmatch cursor jump time [100ms]
 set display=lastline "display long line
-set hlsearch "highlieght search keyword
+set hlsearch "highlight search keyword
 set clipboard+=unnamed "use os clipboard
 set encoding=utf-8 
 set fileencodings=euc-jp,cp932,utf-8 "auto character encoding
@@ -16,8 +16,8 @@ set fileencodings=euc-jp,cp932,utf-8 "auto character encoding
 "End set config
 "Key map config
 nnoremap Y y$ 
-nnoremap + <C-a>    " increiment number
-nnoremap - <C-x>    " decreiment number
+nnoremap + <C-a>    " increment number
+nnoremap - <C-x>    " decrement number
 nnoremap sw <C-w>w  " move next window
 
 "End map config
