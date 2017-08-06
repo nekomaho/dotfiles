@@ -1,33 +1,45 @@
-"set ionfig
+"set config
 set title
 set number
-set shiftwidth=2 "自動インデントでずれる幅
-set autoread     " 編集中のファイルが変更されたら自動で読み直す
-set cursorline   " 現在の行を強調表示
-set cursorcolumn " 現在の行を強調表示（縦）
-set showmatch    " 括弧入力時の対応する括弧を表示
-set matchtime=1  " showmatch実行時の秒数[100ms]
-set display=lastline "長い行を最後まで表示
+set shiftwidth=2 " auto indent width
+set autoread     " auto reload
+set cursorline   " highlight current line
+set cursorcolumn " highlight current cuolumn
+set showmatch    " the cursor will briefly jump to the matching brace when you insert onef
+set matchtime=1  " showmatch cursor jump time [100ms]
+set display=lastline "display long line
+set hlsearch "highlieght search keyword
+set clipboard+=unnamed "use os clipboard
+set encoding=utf-8 
+set fileencodings=euc-jp,cp932,utf-8 "auto character encoding
 
 "End set config
 "Key map config
 nnoremap Y y$ 
-nnoremap + <C-a>    " インクリメント
-nnoremap - <C-x>    " デクリメント
-nnoremap sw <C-w>w  " 次のウィンドウに移動
+nnoremap + <C-a>    " increiment number
+nnoremap - <C-x>    " decreiment number
+nnoremap sw <C-w>w  " move next window
 
 "End map config
+"Display Zenkaku Space
+augroup highlightIdegraphicSpace
+  autocmd!
+  autocmd Colorscheme * highlight IdegraphicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
+  autocmd VimEnter,WinEnter * match IdegraphicSpace /　/
+augroup  END
+
+"End Display Zenkaku Space
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
 endif
 
-let vimbundle_path='~/.vim/bundles'
-let dein_vim_path='~/.vim/bundles/repos/github.com/Shougo/dein.vim'
+let vimbundle_path='~/dotfiles'
+let dein_vim_path='~/dotfiles/dein'
 
 
 " Required:
-set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/dotfiles/dein
 
 " Required:
 if dein#load_state(vimbundle_path)
@@ -40,11 +52,16 @@ if dein#load_state(vimbundle_path)
   " Add or remove your plugins here:
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('w0ng/vim-hybrid')
+  call dein#add('tpope/vim-fugitive')  "git wrapper
+  call dein#add('nathanaelkane/vim-indent-guides') "display indent levels
+  call dein#add('godlygeek/tabular') "formatting text for markdown
+  call dein#add('plasticboy/vim-markdown') "markdown extensions
+  call dein#add('kannokanno/previm') "preview markdown
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('w0ng/vim-hybrid')
 
   " Required:
   call dein#end()
@@ -55,12 +72,30 @@ endif
 filetype plugin indent on
 syntax enable
 colorscheme hybrid
-autocmd VimEnter * execute 'NERDTree'
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
   call dein#install()
 endif
+
+"NERDTree settings
+autocmd VimEnter * execute 'NERDTree'
+
+" vim-markdown settings
+let g:vim_markdown_new_list_item_indent = 2
+
+" markdown preview settings
+let g:previm_open_cmd = 'open -a Google\ Chrome'
+nmap <C-S-p> :PrevimOpen<CR>
+
+" vim-indent-guides settings
+set background=dark
+let g:indent_guides_enable_on_vim_startup=1 " always enabled
+let g:indent_guides_start_level=1
+let g:indent_guides_guide_size=1
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=lightgrey
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=lightgrey
 
 
 "End dein Scripts-------------------------
