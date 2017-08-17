@@ -58,14 +58,15 @@ RPROMPT='${vcs_info_msg_0_}'
 # bind vim keys
 bindkey -v
 bindkey '\e[3~' delete-char
-bindkey '^R' history-incremental-search-backword # for enable Ctrl+r
+bindkey '^R' history-incremental-pattern-search-backward # for enable Ctrl+r
+bindkey '^S' history-incremental-pattern-search-forward # for enable Ctrl+s
 
 # history search
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end#
+bindkey "^N" history-beginning-search-forward-end
 
 # alias
 alias ls='ls -aF'
