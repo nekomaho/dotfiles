@@ -20,6 +20,9 @@ nnoremap + <C-a>    " increment number
 nnoremap - <C-x>    " decrement number
 nnoremap sw <C-w>w  " move next window
 
+inoremap <silent> jj <ESC>
+inoremap <silent> っｊ <ESC>  " when Japanese input
+
 "End map config
 "Display Zenkaku Space
 augroup highlightIdegraphicSpace
