@@ -35,6 +35,10 @@ setopt list_packed
 # completion color
 zstyle ':completion:*' list-colors ''
 
+#disable terminal output/input keys
+stty start undef
+stty stop undef
+
 # fix spell miss
 setopt correct
 # silent beep
