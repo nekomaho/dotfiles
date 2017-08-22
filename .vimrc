@@ -24,6 +24,10 @@ inoremap <silent> jj <ESC>
 inoremap <silent> っｊ <ESC>  " when Japanese input
 
 "End map config
+"Display invisibles
+set list
+set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+
 "Display Zenkaku Space
 augroup highlightIdegraphicSpace
   autocmd!
@@ -31,7 +35,7 @@ augroup highlightIdegraphicSpace
   autocmd VimEnter,WinEnter * match IdegraphicSpace /　/
 augroup  END
 
-"End Display Zenkaku Space
+"End Display invisibles
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
