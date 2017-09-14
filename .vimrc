@@ -11,7 +11,6 @@ set display=lastline "display long line
 set hlsearch "highlight search keyword
 set clipboard+=unnamed "use os clipboard
 set encoding=utf-8 
-set fileencodings=euc-jp,cp932,utf-8 "auto character encoding
 
 "End set config
 "Key map config
