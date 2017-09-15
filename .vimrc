@@ -19,6 +19,12 @@ nnoremap + <C-a>    " increment number
 nnoremap - <C-x>    " decrement number
 nnoremap sw <C-w>w  " move next window
 
+" semicolon key map to colon
+map ; :
+noremap ;; ;
+imap ; :
+inoremap ;; ;
+
 inoremap <silent> jj <ESC>
 inoremap <silent> っｊ <ESC>  " when Japanese input
 
