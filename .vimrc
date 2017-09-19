@@ -72,6 +72,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('plasticboy/vim-markdown') "markdown extensions
   call dein#add('kannokanno/previm') "preview markdown
   call dein#add('tpope/vim-endwise') "adding end after if,do,def and several other keywords.
+  call dein#add('cohama/lexima.vim') "auto close parentheses
   call dein#add('tpope/vim-rails')
 
   " You can specify revision/branch/tag.
