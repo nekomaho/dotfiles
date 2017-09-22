@@ -1,5 +1,6 @@
 DOTFILES_PATH=~/dotfiles
 DOTVIM_PAHT=~/.vim
+QFIXHOWM_PATH=~/.qfixhowm
 ZSH_INSTALL_PATH=/usr/bin/local/zsh
 
 # check homebrew
@@ -8,7 +9,7 @@ if ! (type brew) > /dev/null 2>&1; then
   exit 1
 fi
 
-# create dotfiles dir
+# create dir
 mkdir -p $DOTFILES_PATH
 
 # install zsh
@@ -48,4 +49,7 @@ git clone https://github.com/Shougo/dein.vim $DOTFILES_PATH/dein
 cp .vimrc $DOTFILES_PATH/.vimrc
 
 ln -s $DOTFILES_PATH/.vimrc ~/.vimrc
+
+mkdir -p $QFIXHOWM_PATH
+
 echo "-- .vimrc installed"
