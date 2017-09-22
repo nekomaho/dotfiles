@@ -75,6 +75,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('cohama/lexima.vim') "auto close parentheses
   call dein#add('tpope/vim-rails')
   call dein#add('tmhedberg/matchit') "extension % command
+  call dein#add('tpope/vim-surround') "extension text object
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
