@@ -76,6 +76,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('tpope/vim-rails')
   call dein#add('tmhedberg/matchit') "extension % command
   call dein#add('tpope/vim-surround') "extension text object
+  call dein#add('itchyny/calendar.vim') "view calendar plugins
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
@@ -113,6 +114,9 @@ let g:indent_guides_guide_size=1
 let g:indent_guides_auto_colors=0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=lightgrey
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=lightgrey
+
+" calendar settings
+let g:calendar_google_calendar = 1
 
 "End dein Scripts-------------------------
 
