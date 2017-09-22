@@ -74,6 +74,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('tpope/vim-endwise') "adding end after if,do,def and several other keywords.
   call dein#add('cohama/lexima.vim') "auto close parentheses
   call dein#add('tpope/vim-rails')
+  call dein#add('tmhedberg/matchit') "extension % command
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
@@ -111,7 +112,6 @@ let g:indent_guides_guide_size=1
 let g:indent_guides_auto_colors=0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=lightgrey
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=lightgrey
-
 
 "End dein Scripts-------------------------
 
