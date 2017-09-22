@@ -77,6 +77,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('tmhedberg/matchit') "extension % command
   call dein#add('tpope/vim-surround') "extension text object
   call dein#add('itchyny/calendar.vim') "view calendar plugins
+  call dein#add('fuenor/qfixhowm') " hownm tool of vim
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
@@ -117,6 +118,14 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=lightgrey
 
 " calendar settings
 let g:calendar_google_calendar = 1
+
+" QFixHowm settings
+let hown_dir = '~/.qfixhowm'
+let hown_fileencoding = 'utf-8'
+let hown_fileformat = 'unix'
+let QFixHowm_UserFileType = 'markdown'
+let QFixHowm_UserFileExt= 'md'
+
 
 "End dein Scripts-------------------------
 
