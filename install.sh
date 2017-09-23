@@ -1,5 +1,4 @@
-DOTFILES_PATH=~/dotfiles
-DOTVIM_PAHT=~/.vim
+DOTFILES_PATH=~/.dotfiles
 QFIXHOWM_PATH=~/.qfixhowm
 ZSH_INSTALL_PATH=/usr/bin/local/zsh
 
