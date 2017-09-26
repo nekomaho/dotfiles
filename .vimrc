@@ -14,10 +14,13 @@ set encoding=utf-8
 
 "End set config
 "Key map config
-nnoremap Y y$ 
-nnoremap + <C-a>    " increment number
-nnoremap - <C-x>    " decrement number
-nnoremap sw <C-w>w  " move next window
+nnoremap Y y$
+" increment number
+nnoremap + <C-a>
+" decrement number
+nnoremap - <C-x>
+" move next window
+nnoremap sw <C-w>w
 
 " semicolon key map to colon
 map ; :
@@ -26,12 +29,13 @@ imap ; :
 inoremap ;; ;
 
 inoremap <silent> jj <ESC>
-inoremap <silent> っｊ <ESC>  " when Japanese input
+" when Japanese input
+inoremap <silent> っｊ <ESC>
 
 "End map config
 "Display invisibles
 set list
-set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set listchars=tab:»-,trail:➤,eol:↲,extends:»,precedes:«,nbsp:%
 
 "Display Zenkaku Space
 augroup highlightIdegraphicSpace
@@ -216,4 +220,19 @@ call neocomplete#custom#source('buffer', 'disabled_filetypes', {'_' : 1})
 " ---neocomplete settings end---
 "End dein Scripts-------------------------
 
+" ---start after enabled FileType plugin settings---
+" tab settings
+function! s:tab_settings() abort
+  if &filetype =~ 'make'
+    set noexpandtab
+  else
+    set expandtab
+  endif
+endfunction
+
+augroup setting_tab_indents
+  autocmd!
+  autocmd BufRead,BufNewFile * call s:tab_settings()
+augroup END
+" ---end after enabled FileType plugin settings---
 
