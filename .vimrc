@@ -125,9 +125,11 @@ let g:calendar_google_calendar = 1
 " QFixHowm settings
 let hown_dir = '~/.qfixhowm'
 let hown_fileencoding = 'utf-8'
+let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.md'
 let hown_fileformat = 'unix'
 let QFixHowm_UserFileType = 'markdown'
 let QFixHowm_UserFileExt= 'md'
+let QFixHowm_Title = '#'
 
 " ---snippet settings start---
 " Plugin key-mappings.
