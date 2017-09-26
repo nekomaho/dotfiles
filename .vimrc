@@ -82,6 +82,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('tmhedberg/matchit') "extension % command
   call dein#add('tpope/vim-surround') "extension text object
   call dein#add('itchyny/calendar.vim') "view calendar plugins
+  call dein#add('slim-template/vim-slim') "slim syntax hightlight
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
 
@@ -125,6 +126,9 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=lightgrey
 
 " calendar settings
 let g:calendar_google_calendar = 1
+
+" slim plugin settings
+autocmd BufRead,BufNewFile *.slim setfiletype slim
 
 " QFixHowm settings
 let hown_dir = '~/.qfixhowm'
