@@ -57,11 +57,12 @@ zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 precmd() { vcs_info }
 if [ -n "$VIMRUNTIME" ]; then
-  PROMPT='😽 %F{yellow}(VIM)%f:%F{green}%~%f %n😽 %F{yellow}$%f '
+  PROMPT=$'😽  %F{yellow}(VIM)%f %D %*:${vcs_info_msg_0_} 😽  \n%F{green}%~%f %n %F{yellow}$%f '
 else
-  PROMPT='👿 %F{green}%~%f %n👿 %F{yellow}$%f '
+  PROMPT=$'👿  %D %*:${vcs_info_msg_0_} 👿  \n%F{green}%~%f %n %F{yellow}$%f '
 fi
-RPROMPT='${vcs_info_msg_0_}'
+#RPROMPT='${vcs_info_msg_0_}'
+RPROMPT=''
 
 # bind vim keys
 bindkey -v
