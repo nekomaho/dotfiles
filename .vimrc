@@ -35,7 +35,7 @@ inoremap <silent> っｊ <ESC>
 "End map config
 "Display invisibles
 set list
-set listchars=tab:»-,trail:➤,eol:↲,extends:»,precedes:«,nbsp:%
+set listchars=tab:»-,trail:␣,eol:↲,extends:»,precedes:«,nbsp:%
 
 "Display Zenkaku Space
 augroup highlightIdegraphicSpace
