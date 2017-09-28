@@ -141,7 +141,7 @@ let QFixHowm_UserFileType = 'markdown'
 let QFixHowm_UserFileExt= 'md'
 let QFixHowm_Title = '#'
 " display QFixHowm list
-nnoremap <silent> <C-K-a> :<C-U>call qfixmemo#Glob(g:qfixmemo_dir, "**/*", "open")<CR>
+nnoremap <silent> ssj :<C-U>call qfixmemo#Glob(g:qfixmemo_dir, "**/*", "open")<CR>
 
 " ---snippet settings start---
 " Plugin key-mappings.
