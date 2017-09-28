@@ -106,7 +106,8 @@ endif
 colorscheme hybrid
 
 "NERDTree settings
-autocmd VimEnter * execute 'NERDTree'
+autocmd StdinReadPre * let s:std_in=1  "when start vim with filename
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in")|execute 'NERDTree'|endif
 
 " vim-markdown settings
 let g:vim_markdown_new_list_item_indent = 2

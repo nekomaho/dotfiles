@@ -56,7 +56,11 @@ zstyle ':vcs_info:git:*' unstagedstr "%F{yellow}+"
 zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 precmd() { vcs_info }
-PROMPT='%m:%F{green}%~%f %n %F{yellow}$%f '
+if [ -n "$VIMRUNTIME" ]; then
+  PROMPT='😽 %F{yellow}(VIM)%f:%F{green}%~%f %n😽 %F{yellow}$%f '
+else
+  PROMPT='👿 %F{green}%~%f %n👿 %F{yellow}$%f '
+fi
 RPROMPT='${vcs_info_msg_0_}'
 
 # bind vim keys
@@ -81,6 +85,8 @@ alias mv='mv -i'
 alias vi='vim'
 alias cat='cat -n'
 alias less='less -NM'
+alias neko='cat -n'
+alias emozi=''
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
 
