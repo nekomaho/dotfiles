@@ -83,6 +83,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('tpope/vim-surround') "extension text object
   call dein#add('itchyny/calendar.vim') "view calendar plugins
   call dein#add('slim-template/vim-slim') "slim syntax hightlight
+  call dein#add('simeji/winresizer') "vim windows resize plugin
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
 
@@ -139,6 +140,8 @@ let hown_fileformat = 'unix'
 let QFixHowm_UserFileType = 'markdown'
 let QFixHowm_UserFileExt= 'md'
 let QFixHowm_Title = '#'
+" display QFixHowm list
+nnoremap <silent> <C-K-a> :<C-U>call qfixmemo#Glob(g:qfixmemo_dir, "**/*", "open")<CR>
 
 " ---snippet settings start---
 " Plugin key-mappings.
