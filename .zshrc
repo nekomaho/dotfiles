@@ -1,6 +1,6 @@
 # config pass
 PATH=/usr/local/mysql/bin:$PATH
-PATH=/usr/local/bin:$HOME/.rbenv/bin:$PATH
+PATH=$HOME/app/bin/:/usr/local/bin:$HOME/.rbenv/bin:$PATH
 export PATH
 eval "$(rbenv init -)"
 
