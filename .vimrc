@@ -166,7 +166,7 @@ if has('conceal')
 endif 
 
 "set snippet file dir
-let g:neosnippet#snippets_directory = '~/.vim/bundle/neosnippet-snippets/neosnippets/,~/.dotfiles/snippets'
+let g:neosnippet#snippets_directory = '~/.vim/bundle/neosnippet-snippets/neosnippets/,~/.vim-snippets'
 " ---snippet settings end---
 
 " ---neocomplete settings start---

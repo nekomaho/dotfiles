@@ -1,11 +1,14 @@
 DOTFILES_PATH=~/.dotfiles
 QFIXHOWM_PATH=~/.qfixhowm
 ZSH_INSTALL_PATH=/usr/bin/local/zsh
+VIM_SNIPPETS_PATH=~/.vim-snippets
 SRC=~/src
 APP=~/app
 VIM_GIT_URL=https://github.com/vim/vim.git
 DEIN_GIT_URL=https://github.com/Shougo/dein.vim
+VIM_SNIPPETS_GIT_URL=https://github.com/nekomaho/vim-snippets.git
 VIM_CLONE_PATH=$SRC/vim
+
 
 app_install()
 {
@@ -16,6 +19,7 @@ app_install()
     echo "-- $app_name installed --"
     return 1
   fi
+  echo "-- skip install $app_name --"
   return  0
 }
 
@@ -99,3 +103,12 @@ mkdir -p $QFIXHOWM_PATH
 
 echo "-- .vimrc installed"
 
+# install vim snippets
+echo "-- install vim snippets..."
+if [ -d $VIM_SNIPPETS_PATH ]; then
+  cd $VIM_SNIPPETS_PATH
+  git pull
+else
+  git clone $VIM_SNIPPETS_GIT_URL $VIM_SNIPPETS_PATH
+fi
+echo "-- vim snippets installed"
