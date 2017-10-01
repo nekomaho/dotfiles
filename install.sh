@@ -7,7 +7,9 @@ APP=~/app
 VIM_GIT_URL=https://github.com/vim/vim.git
 DEIN_GIT_URL=https://github.com/Shougo/dein.vim
 VIM_SNIPPETS_GIT_URL=https://github.com/nekomaho/vim-snippets.git
+RBENV_GIT_URL=https://github.com/rbenv/ruby-build.git
 VIM_CLONE_PATH=$SRC/vim
+RBENV_CLONE_PATH=$SRC/rbenv
 
 
 app_install()
@@ -37,6 +39,8 @@ if ! (type brew) > /dev/null 2>&1; then
   echo "require homebrew"
   exit 1
 fi
+
+current_dir=$(cd $(dirname $0); pwd)
 
 # create dir
 mkdir -p $DOTFILES_PATH
@@ -69,9 +73,22 @@ cp .zshrc $DOTFILES_PATH/.zshrc
 ln -s $DOTFILES_PATH/.zshrc ~/.zshrc
 echo "-- .zshrc installed"
 
+# install rbenv
+if [ -d $RBENV_CLONE_PATH ]; then
+  cd $RBENV_CLONE_PATH
+  git pull
+else
+  app_install openssl
+  app_install libyaml
+  app_install libffi
+  git clone $RBENV_GIT_URL $RBENV_CLONE_PATH
+  cd $RBENV_CLONE_PATH
+  PREFIX=$HOME/app ./install.sh
+  rbenv install 2.4.
+fi
+
 # install vim
-current_dir=$(cd $(dirname $0); pwd)
-if [ -d $SRC/vim/ ]; then
+if [ -d $VIM_CLONE_PATH ]; then
   cd $VIM_CLONE_PATH
   git pull
   make clean
