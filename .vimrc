@@ -21,6 +21,14 @@ nnoremap + <C-a>
 nnoremap - <C-x>
 " move next window
 nnoremap sw <C-w>w
+" move previous window
+nnoremap sp <C-w>W
+" enter terminal normal mode
+tnoremap <silent> jj <C-\><C-n>
+tnoremap <silent> jj <C-w>N
+" move next window when terminal mode
+tnoremap sw <C-w><C-w>
+
 
 " semicolon key map to colon
 map ; :
@@ -39,7 +47,7 @@ set listchars=tab:»-,trail:␣,eol:↲,extends:»,precedes:«,nbsp:%
 
 "Display Zenkaku Space
 augroup highlightIdegraphicSpace
-  autocmd!
+
   autocmd Colorscheme * highlight IdegraphicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
   autocmd VimEnter,WinEnter * match IdegraphicSpace /　/
 augroup  END
@@ -86,6 +94,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('simeji/winresizer') "vim windows resize plugin
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
+  call dein#add('soramugi/auto-ctags.vim')
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
