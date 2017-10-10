@@ -47,7 +47,7 @@ set listchars=tab:»-,trail:␣,eol:↲,extends:»,precedes:«,nbsp:%
 
 "Display Zenkaku Space
 augroup highlightIdegraphicSpace
-
+  autocmd!
   autocmd Colorscheme * highlight IdegraphicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
   autocmd VimEnter,WinEnter * match IdegraphicSpace /　/
 augroup  END
