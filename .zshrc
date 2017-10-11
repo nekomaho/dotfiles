@@ -4,6 +4,10 @@ PATH=$HOME/app/bin/:/usr/local/bin:$HOME/.rbenv/bin:$PATH
 export PATH
 eval "$(rbenv init -)"
 
+# load extra settings
+# If environment dependent settings are required, create .local_zshrc and write it in it
+[ -f ~/.local_zshrc ] && source ~/.local_zshrc
+
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
@@ -61,7 +65,6 @@ if [ -n "$VIMRUNTIME" ]; then
 else
   PROMPT=$'👿  %D %*:${vcs_info_msg_0_} 👿  \n%F{green}%~%f %n %F{yellow}$%f '
 fi
-#RPROMPT='${vcs_info_msg_0_}'
 RPROMPT=''
 
 # bind vim keys
