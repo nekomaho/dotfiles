@@ -93,5 +93,7 @@ alias neko='cat -n'
 alias emozi=''
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
-
-
+alias bi='bundle install'
+alias be='bundle exec'
+alias bes='bundle exec rails s'
+alias bec='bundle exec rails c'
