@@ -3,14 +3,16 @@ set title
 set number
 set shiftwidth=2 " auto indent width
 set autoread     " auto reload
-set cursorline   " highlight current line
-set cursorcolumn " highlight current column
 set showmatch    " the cursor will briefly jump to the matching brace when you insert onef
 set matchtime=1  " showmatch cursor jump time [100ms]
 set display=lastline "display long line
 set hlsearch "highlight search keyword
 set clipboard+=unnamed "use os clipboard
 set encoding=utf-8 
+set laststatus=2
+set nocursorline
+set nocursorcolumn
+set norelativenumber
 
 "End set config
 "Key map config
@@ -135,8 +137,8 @@ let g:indent_guides_enable_on_vim_startup=1 " always enabled
 let g:indent_guides_start_level=1
 let g:indent_guides_guide_size=1
 let g:indent_guides_auto_colors=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=lightgrey
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=lightgrey
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=darkgray
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgray
 
 " calendar settings
 let g:calendar_google_calendar = 1
@@ -316,3 +318,4 @@ augroup setting_tab_indents
 augroup END
 " ---end after enabled FileType plugin settings---
 
+syntax sync minlines=256
