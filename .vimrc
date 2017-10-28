@@ -31,9 +31,6 @@ tnoremap <silent> JJ <C-w>N
 " move next window when terminal mode
 tnoremap sw <C-w><C-w>
 
-
-
-
 " semicolon key map to colon
 map ; :
 noremap ;; ;
@@ -96,7 +93,8 @@ if dein#load_state(vimbundle_path)
   call dein#add('itchyny/calendar.vim') "view calendar plugins
   call dein#add('slim-template/vim-slim') "slim syntax hightlight
   call dein#add('simeji/winresizer') "vim windows resize plugin
-  call dein#add('itchyny/lightline.vim')  "A light and configurable statusline/tabline
+  call dein#add('vim-airline/vim-airline')  " Lean & mean status/tabline for vim that's light as air.
+  call dein#add('vim-airline/vim-airline-themes')  " airline themes
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')
@@ -146,65 +144,10 @@ let g:calendar_google_calendar = 1
 " slim plugin settings
 autocmd BufRead,BufNewFile *.slim setfiletype slim
 
-
-" lightline settings
-let g:lightline = {
-        \ 'mode_map': {'c': 'NORMAL'},
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-        \ },
-        \ 'component_function': {
-        \   'modified': 'LightlineModified',
-        \   'readonly': 'LightlineReadonly',
-        \   'fugitive': 'LightlineFugitive',
-        \   'filename': 'LightlineFilename',
-        \   'fileformat': 'LightlineFileformat',
-        \   'filetype': 'LightlineFiletype',
-        \   'fileencoding': 'LightlineFileencoding',
-        \   'mode': 'LightlineMode'
-        \ }
-        \ }
-
-function! LightlineModified()
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '| --CHANGE--' : &modifiable ? '' : '-'
-endfunction
-
-function! LightlineReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
-endfunction
-
-function! LightlineFilename()
-  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:p') : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
-endfunction
-
-function! LightlineFugitive()
-  if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-    return fugitive#head()
-  else
-    return ''
-  endif
-endfunction
-
-function! LightlineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightlineFiletype()
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
-
-function! LightlineFileencoding()
-  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
-endfunction
-
-function! LightlineMode()
-  return winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
+" vim-airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'molokai'
 
 " QFixHowm settings
 let hown_dir = '~/.qfixhowm'
