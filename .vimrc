@@ -30,6 +30,8 @@ tnoremap <silent> JJ <C-\><C-n>
 tnoremap <silent> JJ <C-w>N
 " move next window when terminal mode
 tnoremap sw <C-w><C-w>
+" move previous window when terminal mode
+tnoremap sp <C-w>p
 
 " semicolon key map to colon
 map ; :
