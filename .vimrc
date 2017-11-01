@@ -24,14 +24,14 @@ nnoremap - <C-x>
 " move next window
 nnoremap sw <C-w>w
 " move previous window
-nnoremap sp <C-w>W
+nnoremap sb <C-w>W
 " enter terminal normal mode
 tnoremap <silent> JJ <C-\><C-n>
 tnoremap <silent> JJ <C-w>N
 " move next window when terminal mode
-tnoremap sw <C-w><C-w>
+tnoremap <C-s>w <C-w><C-w>
 " move previous window when terminal mode
-tnoremap sp <C-w>p
+tnoremap <C-s>b <C-w>p
 
 " semicolon key map to colon
 map ; :
