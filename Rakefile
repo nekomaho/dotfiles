@@ -57,7 +57,7 @@ file conf.zshrc_path => '.zshrc' do
 end
 
 file conf.zshrc_path do
-  sh("ln -fs #{conf.zshrc_path} #{conf.zshrc_home_path}")
+  ln_s conf.zshrc_path, conf.zshrc_home_path, force: :true
 end
 
 file conf.vimrc_path => '.vimrc' do
@@ -65,7 +65,7 @@ file conf.vimrc_path => '.vimrc' do
 end
 
 file conf.vimrc_path do
-  sh("ln -fs #{conf.vimrc_path} #{conf.vimrc_home_path}")
+  ln_s conf.vimrc_path, conf.vimrc_home_path, force: :true
 end
 
 class  HomebrewInstall
