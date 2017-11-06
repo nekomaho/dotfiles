@@ -77,9 +77,6 @@ if dein#load_state(vimbundle_path)
   call dein#add(dein_vim_path)
 
   " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('Shougo/neocomplete')
   call dein#add('scrooloose/nerdtree')
   call dein#add('w0ng/vim-hybrid')
   call dein#add('tpope/vim-fugitive')  "git wrapper
@@ -162,89 +159,6 @@ let QFixHowm_Title = '#'
 " display QFixHowm list
 nnoremap <silent> ssj :<C-U>call qfixmemo#Glob(g:qfixmemo_dir, "**/*", "open")<CR>
 
-" ---snippet settings start---
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" " For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif 
-
-"set snippet file dir
-let g:neosnippet#snippets_directory = '~/.vim/bundle/neosnippet-snippets/neosnippets/,~/.vim-snippets'
-" ---snippet settings end---
-
-" ---neocomplete settings start---
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 1
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-       \ 'default' : '',
-       \ 'vimshell' : $HOME.'/.vimshell_hist',
-       \ 'scheme' : $HOME.'/.gosh_completions'
-       \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-   return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-" For no inserting <CR> key.
-"   "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
-let g:neocomplete#auto_completion_start_length = 1
-call neocomplete#custom#source('buffer', 'disabled_filetypes', {'_' : 1})
-
-" ---neocomplete settings end---
 "End dein Scripts-------------------------
 
 " ---start after enabled FileType plugin settings---
