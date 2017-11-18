@@ -13,9 +13,7 @@ task :zsh_install => [:zsh, :zsh_completions, conf.zshrc_path] do
   DefaultShellSetting.setting(conf.zsh_install_path)
 end
 
-task :vim_install => [:dein] do
-  VimInstall.install(conf.vim_clone_path)
-end
+task :vim_install => [:dein]
 
 task :dein => [:vim] do
   VimInstall.dein(conf.dotfiles_dir,conf.app) 
@@ -25,8 +23,9 @@ task :vim => [conf.vimrc_path, :lua ] do
   if File.exists?(conf.vim_clone_path)
     VimInstall.update(conf.vim_clone_path,conf.app)
   else
-    VimInstall.install(conf.vim_clone_path,conf.app)
+    VimInstall.build(conf.vim_clone_path,conf.app)
   end
+  VimInstall.install(conf.vim_clone_path)
 end
 
 task :lua do
