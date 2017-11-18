@@ -15,7 +15,7 @@ class  VimInstall
   
   def self.install(clone_path)
     cd clone_path
-    make_install 
+    make_install
   end
 
   def self.test(clone_path)
