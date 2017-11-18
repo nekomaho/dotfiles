@@ -7,10 +7,20 @@ class  VimInstall
   VIM_GIT_URL='https://github.com/vim/vim.git'
   DEIN_GIT_URL='https://github.com/Shougo/dein.vim'
 
-  def self.install(clone_path, app_path)
+  def self.build(clone_path, app_path)
     sh("git clone #{VIM_GIT_URL} #{clone_path}")
     cd clone_path
     vim_make(app_path)
+  end
+  
+  def self.install(clone_path)
+    cd clone_path
+    make_install 
+  end
+
+  def self.test(clone_path)
+    cd clone_path
+    make_test
   end
 
   def self.update(clone_path, app_path)
@@ -18,11 +28,6 @@ class  VimInstall
     sh("git pull")
     make_clean
     vim_make(app_path)
-  end
-
-  def self.install(clone_path)
-    cd clone_path
-    make_install
   end
 
   def self.dein(clone_path, app_path)
@@ -46,6 +51,5 @@ class  VimInstall
       " --with-lua-prefix=/usr/local"
     configure(config_str)
     make
-    #    make_test
   end
 end

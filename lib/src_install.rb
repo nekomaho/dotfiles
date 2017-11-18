@@ -16,8 +16,6 @@ module SrcInstall
   end
 
   def configure(option)
-# TODO: うまくいっていない。ここの部分を直すところから
-    binding.pry
     sh("./configure #{option}")
   end
 end
