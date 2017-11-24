@@ -12,6 +12,10 @@ class  HomebrewInstall
   end 
 
   def self.upgrade(app)
-    sh("brew upgrade #{app}")
+    upgrade_check(app) ? sh("brew upgrade #{app}") : puts("skip upgrade #{app}")
   end 
+
+  def self.upgrade_check(app)
+    Open3.capture3("brew outdated #{app}")[0] =~ /#{app}/
+  end
 end
