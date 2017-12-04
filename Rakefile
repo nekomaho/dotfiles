@@ -49,22 +49,18 @@ directory conf.src
 directory conf.app
 directory conf.qfixhowm_path
 
-file conf.zshrc_path => conf.dotfiles_dir do
+file conf.zshrc_path => '.zshrc' do
   cp '.zshrc', conf.zshrc_path
 end
 
-file conf.zshrc_path do
+file conf.zshrc_home_path do
   ln_s conf.zshrc_path, conf.zshrc_home_path, force: :true
 end
 
-file conf.vimrc_path => conf.dotfiles_dir do
+file conf.vimrc_path => '.vimrc' do
   cp '.vimrc', conf.vimrc_path
+  ln_s conf.vimrc_path, conf.vimrc_home_path, force: :true unless File.exists?(conf.vimrc_home_path)
 end
-
-file conf.vimrc_path do
-  ln_s conf.vimrc_path, conf.vimrc_home_path, force: :true
-end
-
 
 namespace :upgrade do
   task :all => [:zsh_upgrade, :vim_upgrade, :ag_upgrade]

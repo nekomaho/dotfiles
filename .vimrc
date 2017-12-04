@@ -18,9 +18,9 @@ set norelativenumber
 "Key map config
 nnoremap Y y$
 " increment number
-nnoremap + <C-a>
+nnoremap n- <C-a>
 " decrement number
-nnoremap - <C-x>
+nnoremap n+ <C-x>
 " move next window
 nnoremap sw <C-w>w
 " move previous window
@@ -95,6 +95,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('vim-airline/vim-airline')  " Lean & mean status/tabline for vim that's light as air.
   call dein#add('vim-airline/vim-airline-themes')  " airline themes
   call dein#add('rking/ag.vim')  " for silver searcher plugin
+  call dein#add('justinmk/vim-dirvish')  " Path navigator
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')
@@ -117,10 +118,6 @@ if dein#check_install()
 endif
 
 colorscheme hybrid
-
-"NERDTree settings
-autocmd StdinReadPre * let s:std_in=1  "when start vim with filename
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in")|execute 'NERDTree'|endif
 
 " vim-markdown settings
 let g:vim_markdown_new_list_item_indent = 2
