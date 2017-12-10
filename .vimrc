@@ -8,7 +8,7 @@ set matchtime=1  " showmatch cursor jump time [100ms]
 set display=lastline "display long line
 set hlsearch "highlight search keyword
 set clipboard+=unnamed "use os clipboard
-set encoding=utf-8 
+set encoding=utf-8
 set laststatus=2
 set nocursorline
 set nocursorcolumn
@@ -55,6 +55,35 @@ augroup highlightIdegraphicSpace
   autocmd VimEnter,WinEnter * match IdegraphicSpace /　/
 augroup  END
 
+"Display last space
+augroup highlightLastSpace
+  autocmd!
+  autocmd Colorscheme * highlight LastSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
+  autocmd VimEnter,WinEnter * match LastSpace /\s\+$/
+augroup  END
+
+"Line Number color settings
+augroup highlightLine
+  autocmd!
+  autocmd Colorscheme * highlight LineNr ctermfg=246
+augroup END
+
+"Open Terminal with new tab
+command! Nt call OpenNewTabWithTerminal()
+
+function! OpenNewTabWithTerminal()
+  tabnew
+  term ++curwin
+endfunction
+
+"Open Terminal with new window
+command! Ntw call OpenNewWindowWithTerminal()
+
+function! OpenNewWindowWithTerminal()
+  vnew
+  term ++curwin
+endfunction
+
 "End Display invisibles
 "dein Scripts-----------------------------
 if &compatible
@@ -84,6 +113,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('godlygeek/tabular') "formatting text for markdown
   call dein#add('plasticboy/vim-markdown') "markdown extensions
   call dein#add('kannokanno/previm') "preview markdown
+
   call dein#add('tpope/vim-endwise') "adding end after if,do,def and several other keywords.
   call dein#add('cohama/lexima.vim') "auto close parentheses
   call dein#add('tpope/vim-rails')
