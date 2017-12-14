@@ -7,13 +7,16 @@ require "./lib/vim_settings.rb"
 conf = ConfigSettings.new
 
 task default: :all
-task :all => [:zsh_install, :vim_install, :ag_install]
+task :all => :install
+task :install => [:zsh_install, :vim_install, :ag_install, :global_install]
 
 task :zsh_install => [:zsh, :zsh_completions, conf.zshrc_path] do
   DefaultShellSetting.setting(conf.zsh_install_path)
 end
 
 task :vim_install => [:dein]
+
+task :global_install => [:global, :exuberant_ctags, :pygments]
 
 task :dein => [:vim] do
   VimInstall.dein(conf.dotfiles_dir,conf.app) 
@@ -44,6 +47,18 @@ task :zsh_completions do
   HomebrewInstall.install("zsh-completions")
 end
 
+task :global do
+  HomebrewInstall.install("global")
+end
+
+task :exuberant_ctags do
+  HomebrewInstall.install("exuberant-ctags")
+end
+
+task :pygments do
+  HomebrewInstall.install("pygments")
+end
+
 directory conf.dotfiles_dir
 directory conf.src
 directory conf.app
@@ -63,14 +78,16 @@ file conf.vimrc_path => '.vimrc' do
 end
 
 namespace :upgrade do
-  task :all => [:zsh_upgrade, :vim_upgrade, :ag_upgrade]
+  task :all => [:zsh_upgrade, :vim_upgrade, :ag_upgrade, :global_upgrade]
   task :zsh_upgrade => [:zsh, :zsh_completions, conf.zshrc_path] do
     DefaultShellSetting.setting(conf.zsh_install_path)
   end
 
   task :vim_upgrade => [:dein_upgrade]
 
-  task :dein_upgrade => [:vim] do
+  task :global_upgrade => [:global, :exuberant_ctags, :pygments]
+
+task :dein_upgrade => [:vim] do
     VimInstall.dein(conf.dotfiles_dir,conf.app) 
   end
 
@@ -97,5 +114,17 @@ namespace :upgrade do
 
   task :zsh_completions do
     HomebrewInstall.upgrade("zsh-completions")
+  end
+
+  task :global do
+    HomebrewInstall.upgrade("global")
+  end
+
+  task :exuberant_ctags do
+    HomebrewInstall.upgrade("exuberant-ctags")
+  end
+
+  task :pygments do
+    HomebrewInstall.upgrade("pygments")
   end
 end

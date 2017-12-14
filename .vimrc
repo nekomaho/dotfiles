@@ -126,6 +126,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('vim-airline/vim-airline-themes')  " airline themes
   call dein#add('rking/ag.vim')  " for silver searcher plugin
   call dein#add('justinmk/vim-dirvish')  " Path navigator
+  call dein#add('vim-scripts/gtags.vim')  " gtags plugin
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')
