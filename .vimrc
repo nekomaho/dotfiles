@@ -45,6 +45,10 @@ inoremap <silent> っｊ <ESC>
 
 " gtags key binds
 augroup gtagsKeySetting
+  " <C-g> grep source code
+  " <C-l> display function that which open file
+  " <C-j> search definition
+  " <C-k> search using function
   autocmd!
   autocmd BufNewFile,BufRead *.c nnoremap <C-g> :Gtags -g
   autocmd BufNewFile,BufRead *.c nnoremap <C-l> :Gtags -f %<CR>
