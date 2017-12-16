@@ -43,6 +43,15 @@ inoremap <silent> jj <ESC>
 " when Japanese input
 inoremap <silent> っｊ <ESC>
 
+" gtags key binds
+augroup gtagsKeySetting
+  autocmd!
+  autocmd BufNewFile,BufRead *.c nnoremap <C-g> :Gtags -g
+  autocmd BufNewFile,BufRead *.c nnoremap <C-l> :Gtags -f %<CR>
+  autocmd BufNewFile,BufRead *.c nnoremap <C-j> :Gtags <C-r><C-w><CR>
+  autocmd BufNewFile,BufRead *.c nnoremap <C-k> :Gtags -r <C-r><C-w><CR>
+augroup END
+
 "End map config
 "Display invisibles
 set list
