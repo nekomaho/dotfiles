@@ -19,7 +19,7 @@ task :vim_install => [:dein]
 task :global_install => [:global, :exuberant_ctags, :pygments]
 
 task :dein => [:vim] do
-  VimInstall.dein(conf.dotfiles_dir,conf.app) 
+  VimInstall.dein(conf.dotfiles_dir,conf.app)
 end
 
 task :vim => [conf.vimrc_path, :lua ] do
@@ -87,8 +87,8 @@ namespace :upgrade do
 
   task :global_upgrade => [:global, :exuberant_ctags, :pygments]
 
-task :dein_upgrade => [:vim] do
-    VimInstall.dein(conf.dotfiles_dir,conf.app) 
+  task :dein_upgrade => [:vim] do
+    VimInstall.dein(conf.dotfiles_dir,conf.app)
   end
 
   task :vim => [conf.vimrc_path, :lua ] do
