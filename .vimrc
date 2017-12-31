@@ -165,6 +165,7 @@ colorscheme hybrid
 
 " vim-markdown settings
 let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_folding_disabled = 1
 
 " markdown preview settings
 let g:previm_open_cmd = 'open -a Google\ Chrome'
