@@ -6,7 +6,8 @@ class  HomebrewInstall
   class << self
     def install(app)
       Bundler.with_original_env do
-        check(app) ? sh("brew install #{app}") : puts("skip install #{app}")
+        return sh("brew install #{app}") if check(app)
+        puts("skip install #{app}")
       end
     end
 
