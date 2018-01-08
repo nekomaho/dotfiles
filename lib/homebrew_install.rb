@@ -19,7 +19,8 @@ class  HomebrewInstall
 
     def upgrade(app)
       Bundler.with_original_env do
-        upgrade_check(app) ? sh("brew upgrade #{app}") : puts("skip upgrade #{app}")
+        return sh("brew upgrade #{app}") if upgrade_check(app)
+        puts("skip upgrade #{app}")
       end
     end
 
