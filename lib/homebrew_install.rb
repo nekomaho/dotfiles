@@ -29,5 +29,10 @@ class  HomebrewInstall
         Open3.capture3("brew outdated #{app}")[0] =~ /#{app}/
       end
     end
+
+    def install_or_upgrade(app)
+      install(app)
+      upgrade(app)
+    end
   end
 end
