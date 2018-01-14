@@ -143,6 +143,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('tpope/vim-fugitive')
   call dein#add('gregsexton/gitv') "git log viewr
   call dein#add('hotwatermorning/auto-git-diff') "git rebase viewer
+  call dein#add('rhysd/committia.vim') "git commit viewr
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')
