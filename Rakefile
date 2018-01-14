@@ -32,31 +32,31 @@ task :vim => [conf.vimrc_path, :lua ] do
 end
 
 task :ag_install do
-  HomebrewInstall.install("the_silver_searcher")
+  HomebrewInstall.install_or_update("the_silver_searcher")
 end
 
 task :lua do
-  HomebrewInstall.install("lua")
+  HomebrewInstall.install_or_update("lua")
 end
 
 task :zsh do
-  HomebrewInstall.install("zsh")
+  HomebrewInstall.install_or_update("zsh")
 end
 
 task :zsh_completions do
-  HomebrewInstall.install("zsh-completions")
+  HomebrewInstall.install_or_update("zsh-completions")
 end
 
 task :global do
-  HomebrewInstall.install("global")
+  HomebrewInstall.install_or_update("global")
 end
 
 task :exuberant_ctags do
-  HomebrewInstall.install("exuberant-ctags")
+  HomebrewInstall.install_or_update("exuberant-ctags")
 end
 
 task :pygments do
-  HomebrewInstall.install("pygments")
+  HomebrewInstall.install_or_update("pygments")
 end
 
 directory conf.dotfiles_dir
@@ -78,53 +78,25 @@ file conf.vimrc_path => '.vimrc' do
 end
 
 namespace :upgrade do
-  task :all => [:zsh_upgrade, :vim_upgrade, :ag_upgrade, :global_upgrade]
-  task :zsh_upgrade => [:zsh, :zsh_completions, conf.zshrc_path] do
+  task :all => [:zsh_upgrade, :vim_upgrade, "rake:ag_install", :global_upgrade]
+  task :zsh_upgrade => ["rake:zsh", "rake:zsh_completions", conf.zshrc_path] do
     DefaultShellSetting.setting(conf.zsh_install_path)
   end
 
   task :vim_upgrade => [:dein_upgrade]
 
-  task :global_upgrade => [:global, :exuberant_ctags, :pygments]
+  task :global_upgrade => ["rake:global", "rake:exuberant_ctags", "rake:pygments"]
 
   task :dein_upgrade => [:vim] do
     VimInstall.dein(conf.dotfiles_dir,conf.app)
   end
 
-  task :vim => [conf.vimrc_path, :lua ] do
+  task :vim => [conf.vimrc_path, "rake:lua" ] do
     if File.exists?(conf.vim_clone_path)
       VimInstall.update(conf.vim_clone_path,conf.app)
     else
       VimInstall.build(conf.vim_clone_path,conf.app)
     end
     VimInstall.install(conf.vim_clone_path)
-  end
-
-  task :ag_upgrade do
-    HomebrewInstall.upgrade("the_silver_searcher")
-  end
-
-  task :lua do
-    HomebrewInstall.upgrade("lua")
-  end
-
-  task :zsh do
-    HomebrewInstall.upgrade("zsh")
-  end
-
-  task :zsh_completions do
-    HomebrewInstall.upgrade("zsh-completions")
-  end
-
-  task :global do
-    HomebrewInstall.upgrade("global")
-  end
-
-  task :exuberant_ctags do
-    HomebrewInstall.upgrade("exuberant-ctags")
-  end
-
-  task :pygments do
-    HomebrewInstall.upgrade("pygments")
   end
 end
