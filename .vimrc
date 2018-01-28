@@ -144,6 +144,8 @@ if dein#load_state(vimbundle_path)
   call dein#add('gregsexton/gitv') "git log viewr
   call dein#add('hotwatermorning/auto-git-diff') "git rebase viewer
   call dein#add('rhysd/committia.vim') "git commit viewr
+  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+  call dein#add('Shougo/unite.vim')
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')
@@ -223,5 +225,18 @@ augroup setting_tab_indents
   autocmd BufRead,BufNewFile * call s:tab_settings()
 augroup END
 " ---end after enabled FileType plugin settings---
+
+"unite.vim settings
+let g:unite_source_history_yank_enable = 1
+try
+  let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
+  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+catch
+endtry
+" search a file in the filetree
+nnoremap <space><space> :split<cr> :<C-u>Unite -start-insert file_rec/async<cr>
+" reset not it is <C-l> normally
+:nnoremap <space>r <Plug>(unite_restart)
+
 
 syntax sync minlines=256
