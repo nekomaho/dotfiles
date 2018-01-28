@@ -2,7 +2,7 @@ require "./lib/src_install.rb"
 
 class  VimInstall
   extend SrcInstall
-  extend Rake::DSL 
+  extend Rake::DSL
 
   VIM_GIT_URL='https://github.com/vim/vim.git'
   DEIN_GIT_URL='https://github.com/Shougo/dein.vim'
@@ -12,7 +12,7 @@ class  VimInstall
     cd clone_path
     vim_make(app_path)
   end
-  
+ 
   def self.install(clone_path)
     cd clone_path
     make_install
@@ -31,11 +31,12 @@ class  VimInstall
   end
 
   def self.dein(clone_path, app_path)
-    if File.exists?(clone_path)
-      cd clone_path+'/dein'
+    dein_clone_path =  clone_path+'/dein'
+    if File.exists?(dein_clone_path)
+      cd dein_clone_path
       sh("git pull")
     else
-      sh("git clone #{DEIN_GIT_URL} #{clone_path}/dein")
+      sh("git clone #{DEIN_GIT_URL} #{dein_clone_path}")
     end
   end
 
