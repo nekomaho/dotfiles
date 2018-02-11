@@ -146,6 +146,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('rhysd/committia.vim') "git commit viewr
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
   call dein#add('Shougo/unite.vim')
+  call dein#add('airblade/vim-gitgutter') "git diff tool
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')
