@@ -17,5 +17,3 @@ class DefaultShellSetting
     STDIN.noecho { Readline.readline("Password: ").tap{ puts } }
   end
 end
-
-
