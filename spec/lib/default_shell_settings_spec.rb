@@ -1,7 +1,7 @@
 require './lib/default_shell_settings'
 require './spec/base'
 
-describe "DefaultShellSettings test" do
+describe "DefaultShellSetting test" do
   before do
     extend SrcInstall
     def sh(command)
