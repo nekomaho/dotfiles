@@ -1,3 +1,5 @@
+require 'rake'
+
 class DefaultShellSetting
   ETC_SHELL="/etc/shell"
 
