@@ -1,7 +1,8 @@
 require './lib/default_shell_settings'
+require './lib/src_install'
 require './spec/base'
 
-describe "DefaultShellSetting test" do
+describe "DefaultShellSettings test" do
   before do
     extend SrcInstall
     def sh(command)
@@ -31,5 +32,19 @@ describe "DefaultShellSetting test" do
   end
 
   describe "get_password" do
+    before do
+      io = StringIO.new
+      io.puts 'pass'
+      io.puts 'pass'
+      $stdin = io
+    end
+
+    after do
+      $stdin = STDIN
+    end
+
+    it 'is return password' do
+      expect(DefaultShellSetting.get_password).to eq('pass')
+    end
   end
 end
