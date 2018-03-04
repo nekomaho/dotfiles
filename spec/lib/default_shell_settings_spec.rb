@@ -30,21 +30,4 @@ describe "DefaultShellSettings test" do
       end
     end
   end
-
-  describe "get_password" do
-    before do
-      io = StringIO.new
-      io.puts 'pass'
-      io.puts 'pass'
-      $stdin = io
-    end
-
-    after do
-      $stdin = STDIN
-    end
-
-    it 'is return password' do
-      expect(DefaultShellSetting.get_password).to eq('pass')
-    end
-  end
 end
