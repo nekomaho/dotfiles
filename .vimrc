@@ -132,7 +132,6 @@ if dein#load_state(vimbundle_path)
   call dein#add('tpope/vim-rails')
   call dein#add('tmhedberg/matchit') "extension % command
   call dein#add('tpope/vim-surround') "extension text object
-  call dein#add('itchyny/calendar.vim') "view calendar plugins
   call dein#add('slim-template/vim-slim') "slim syntax hightlight
   call dein#add('simeji/winresizer') "vim windows resize plugin
   call dein#add('vim-airline/vim-airline')  " Lean & mean status/tabline for vim that's light as air.
