@@ -119,7 +119,6 @@ if dein#load_state(vimbundle_path)
   call dein#add(dein_vim_path)
 
   " Add or remove your plugins here:
-  call dein#add('scrooloose/nerdtree')
   call dein#add('w0ng/vim-hybrid')
   call dein#add('tpope/vim-fugitive')  "git wrapper
   call dein#add('nathanaelkane/vim-indent-guides') "display indent levels
