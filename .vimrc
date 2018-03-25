@@ -233,10 +233,5 @@ try
   call unite#filters#matcher_default#use(['matcher_fuzzy'])
 catch
 endtry
-" search a file in the filetree
-nnoremap <space><space> :split<cr> :<C-u>Unite -start-insert file_rec/async<cr>
-" reset not it is <C-l> normally
-:nnoremap <space>r <Plug>(unite_restart)
-
 
 syntax sync minlines=256
