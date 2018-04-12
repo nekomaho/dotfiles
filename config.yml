@@ -1,2 +1,2 @@
-ZSH_INSTALL_PATH: /usr/bin/local/zsh
+ZSH_INSTALL_PATH: /usr/local/bin/zsh
 DOTFILE_PATH: .dotfiles
