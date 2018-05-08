@@ -13,6 +13,7 @@ set laststatus=2
 set nocursorline
 set nocursorcolumn
 set norelativenumber
+set splitright
 
 "End set config
 "Key map config
