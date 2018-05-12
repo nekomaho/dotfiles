@@ -40,37 +40,37 @@ end
 
 desc 'install relaated silver bullet(ag)'
 task :ag_install do
-  HomebrewInstall.install_or_update("the_silver_searcher")
+  HomebrewInstall.install_or_upgrade("the_silver_searcher")
 end
 
 desc 'install lua that need vim'
 task :lua do
-  HomebrewInstall.install_or_update("lua")
+  HomebrewInstall.install_or_upgrade("lua")
 end
 
 desc 'install zsh'
 task :zsh do
-  HomebrewInstall.install_or_update("zsh")
+  HomebrewInstall.install_or_upgrade("zsh")
 end
 
 desc 'install zsh_completions'
 task :zsh_completions do
-  HomebrewInstall.install_or_update("zsh-completions")
+  HomebrewInstall.install_or_upgrade("zsh-completions")
 end
 
 desc 'insall global that source code tagging system'
 task :global do
-  HomebrewInstall.install_or_update("global")
+  HomebrewInstall.install_or_upgrade("global")
 end
 
 desc 'install ctags taht source code tagging'
 task :exuberant_ctags do
-  HomebrewInstall.install_or_update("exuberant-ctags")
+  HomebrewInstall.install_or_upgrade("exuberant-ctags")
 end
 
 desc 'install pygments that syntax highlight system'
 task :pygments do
-  HomebrewInstall.install_or_update("pygments")
+  HomebrewInstall.install_or_upgrade("pygments")
 end
 
 desc 'make need directory'
