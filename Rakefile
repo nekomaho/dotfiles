@@ -84,17 +84,21 @@ file conf.zshrc_home_path => conf.zshrc_path do
   ln_s conf.zshrc_path, conf.zshrc_home_path, force: :true
 end
 
-file conf.zshrc_path do
+file conf.zshrc_path => '.zshrc' do
   cp '.zshrc', conf.zshrc_path
 end
+
+file '.zshrc'
 
 file conf.vimrc_home_path => conf.vimrc_path do
   ln_s conf.vimrc_path, conf.vimrc_home_path, force: :true
 end
 
-file conf.vimrc_path do
+file conf.vimrc_path => '.vimrc' do
   cp '.vimrc', conf.vimrc_path
 end
+
+file '.vimrc'
 
 namespace :upgrade do
   desc 'upgrade all application'
