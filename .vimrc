@@ -147,6 +147,8 @@ if dein#load_state(vimbundle_path)
   call dein#add('Shougo/unite.vim')
   call dein#add('airblade/vim-gitgutter') "git diff tool
   call dein#add('cohama/agit.vim') "git log viewr
+  call dein#add('kchmck/vim-coffee-script') " coffee script syntax highlight
+
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')
@@ -226,6 +228,11 @@ augroup setting_tab_indents
   autocmd BufRead,BufNewFile * call s:tab_settings()
 augroup END
 " ---end after enabled FileType plugin settings---
+
+" coffee script settings
+au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
+autocmd FileType coffee    setlocal sw=2 sts=2 ts=2 et
+" --- end coffee script setting---
 
 "unite.vim settings
 let g:unite_source_history_yank_enable = 1
