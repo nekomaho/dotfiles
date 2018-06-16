@@ -1,17 +1,13 @@
 require './spec/base'
 require './spec/helper/config_settings_mock'
+require './spec/helper/homebrew_install_mock'
 
 describe 'Rakefile tests' do
 
   using ConfigSettingMock
+  using HomebrewInstallMock
 
   ## stub of install or upgrade method
-  class  HomebrewInstall
-    def self.install_or_upgrade(app)
-      app
-    end
-  end
-
   class  VimInstall
     def self.update(path, app)
       'update'
