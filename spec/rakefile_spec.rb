@@ -172,7 +172,6 @@ describe 'Rakefile tests' do
   describe 'make directory' do
     describe 'make directory dependency' do
       it 'is dotfiles_dir, conf.src, conf.app, conf.fixhowm' do
-        binding.pry
         expect(@rake['make_dir'].sources).to include "#{conf.dotfiles_dir}"
         expect(@rake['make_dir'].sources).to include "#{conf.src}"
         expect(@rake['make_dir'].sources).to include "#{conf.app}"
