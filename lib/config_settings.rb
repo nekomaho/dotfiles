@@ -5,16 +5,15 @@ class ConfigSettings
 
   def initialize(input_config_file=nil)
     @input_config_file = input_config_file
-    @home = "#{ENV["HOME"]}"
-    @dotfiles_dir = "#{@home}/#{config[:DOTFILE_PATH]}"
-    @src = "#{@home}/src"
-    @app = "#{@home}/app"
+    @dotfiles_dir = "#{home}/#{config[:DOTFILE_PATH]}"
+    @src = "#{home}/src"
+    @app = "#{home}/app"
     @vim_clone_path = "#{@src}/vim"
-    @qfixhowm_path = "#{@home}/.qfixhowm"
+    @qfixhowm_path = "#{home}/.qfixhowm"
   end
 
   def zshrc_home_path
-    "#{@home}/.zshrc"
+    "#{home}/.zshrc"
   end
 
   def zshrc_path
@@ -26,7 +25,7 @@ class ConfigSettings
   end
 
   def vimrc_home_path
-    "#{@home}/.vimrc"
+    "#{home}/.vimrc"
   end
 
   def vimrc_path
@@ -38,6 +37,10 @@ class ConfigSettings
   end
 
   private
+
+  def home
+    @home ||= "#{ENV["HOME"]}"
+  end
 
   def config_file
     @config_file ||= @input_config_file || "config.yml"
