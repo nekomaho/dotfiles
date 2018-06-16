@@ -1,7 +1,3 @@
-require 'rake'
-require "./lib/config_settings"
-require './lib/homebrew_install'
-require './lib/vim_settings'
 require './spec/base'
 
 describe 'Rakefile tests' do
