@@ -1,30 +1,14 @@
 require './spec/base'
 require './spec/helper/config_settings_mock'
 require './spec/helper/homebrew_install_mock'
+require './spec/helper/vim_install_mock'
 
 describe 'Rakefile tests' do
 
+  # mock for rack test
   using ConfigSettingMock
   using HomebrewInstallMock
-
-  ## stub of install or upgrade method
-  class  VimInstall
-    def self.update(path, app)
-      'update'
-    end
-
-    def self.build(path, app)
-      'build'
-    end
-
-    def self.install(path)
-      path
-    end
-
-    def self.dein(path, app)
-      path
-    end
-  end
+  using VimInstallMock
 
   let(:conf) { ConfigSettings.new }
 
