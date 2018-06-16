@@ -1,6 +1,10 @@
 require './spec/base'
+require './spec/helper/config_settings_mock'
 
 describe 'Rakefile tests' do
+
+  using ConfigSettingMock
+
   ## stub of install or upgrade method
   class  HomebrewInstall
     def self.install_or_upgrade(app)
