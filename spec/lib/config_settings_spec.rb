@@ -1,4 +1,4 @@
-require './lib/config_settings'
+require './spec/base'
 
 describe "ConfigSettings test" do
   let(:config) { ConfigSettings.new("spec/lib/yml/dummy.yml") }
