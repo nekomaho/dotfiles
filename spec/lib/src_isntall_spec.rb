@@ -1,4 +1,3 @@
-require './lib/src_install'
 require './spec/base'
 
 describe "SrcInstall test" do
