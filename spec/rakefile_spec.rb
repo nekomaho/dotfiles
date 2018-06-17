@@ -1,3 +1,4 @@
+require 'fileutils'
 require './spec/base'
 require './spec/helper/config_settings_helper'
 require './spec/helper/homebrew_install_mock'
@@ -174,6 +175,22 @@ describe 'Rakefile tests' do
       it 'is exist .zshrc to zshrc_path' do
         @rake[conf.zshrc_path].invoke
         expect(FileTest.exist?(conf.zshrc_path)).to be_truthy
+      end
+    end
+
+    describe 'create symblic link to zashrc_home_path to zshrc_path' do
+      before do
+        FileUtils.touch(conf.zshrc_path)
+      end
+
+      after do
+        File.delete(conf.zshrc_home_path)
+        File.delete(conf.zshrc_path)
+      end
+
+      it 'is symbolic link of zshrc_path' do
+        @rake[conf.zshrc_home_path].invoke
+        expect(FileTest.symlink?(conf.zshrc_home_path)).to be_truthy
       end
     end
   end
