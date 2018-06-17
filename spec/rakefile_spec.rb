@@ -6,7 +6,6 @@ require './spec/helper/vim_install_mock'
 
 describe 'Rakefile tests' do
 
-  # mock for rack test
   include ConfigSettingHelper
   using HomebrewInstallMock
   using VimInstallMock
