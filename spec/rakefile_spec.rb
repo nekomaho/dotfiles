@@ -1,21 +1,26 @@
 require './spec/base'
-require './spec/helper/config_settings_mock'
+require './spec/helper/config_settings_helper'
 require './spec/helper/homebrew_install_mock'
 require './spec/helper/vim_install_mock'
 
 describe 'Rakefile tests' do
 
   # mock for rack test
-  using ConfigSettingMock
+  include ConfigSettingHelper
   using HomebrewInstallMock
   using VimInstallMock
 
   let(:conf) { ConfigSettings.new }
 
   before(:all) do
+    test_config_setting
     @rake = Rake::Application.new
     Rake.application = @rake
     Rake.application.raw_load_rakefile
+  end
+
+  after(:all) do
+    config_setting_teardown
   end
 
   before(:each) do
@@ -156,6 +161,19 @@ describe 'Rakefile tests' do
         expect(@rake['make_dir'].sources).to include "#{conf.src}"
         expect(@rake['make_dir'].sources).to include "#{conf.app}"
         expect(@rake['make_dir'].sources).to include "#{conf.qfixhowm_path}"
+      end
+    end
+  end
+
+  describe 'file task' do
+    describe 'copy zshrc to zshrc_path' do
+      after do
+        File.delete(conf.zshrc_path)
+      end
+
+      it 'is exist .zshrc to zshrc_path' do
+        @rake[conf.zshrc_path].invoke
+        expect(FileTest.exist?(conf.zshrc_path)).to be_truthy
       end
     end
   end
