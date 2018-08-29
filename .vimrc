@@ -14,6 +14,7 @@ set nocursorline
 set nocursorcolumn
 set norelativenumber
 set splitright
+set termwinscroll=100000
 
 "End set config
 "Key map config
