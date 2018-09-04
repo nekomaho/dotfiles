@@ -76,4 +76,24 @@ describe 'Homebrew install tests' do
       end
     end
   end
+
+  describe "#upgrade_check" do
+    subject(:upgrade_check) { HomebrewInstall.upgrade_check('dummy') }
+
+    context "when not upgrade application" do
+      before do
+        allow(Open3).to receive(:capture3).and_return(['hoge'])
+      end
+
+      it { is_expected.to be_falsy }
+    end
+
+    context "when upgrade application" do
+      before do
+        allow(Open3).to receive(:capture3).and_return(['brew outdated dummy'])
+      end
+
+      it { is_expected.to be_truthy }
+    end
+  end
 end
