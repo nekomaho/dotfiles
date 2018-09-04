@@ -2,14 +2,30 @@ require './spec/base'
 
 describe 'Homebrew install tests' do
   describe "#install" do
-    before do
-      allow(HomebrewInstall).to receive(:sh)
-      allow(HomebrewInstall).to receive(:check).and_return(true)
+    subject(:install) {HomebrewInstall.install('dummy')}
+ 
+    context "when need install" do
+      before do
+        allow(HomebrewInstall).to receive(:sh)
+        allow(HomebrewInstall).to receive(:check).and_return(true)
+      end
+
+      it do
+        subject
+        expect(HomebrewInstall).to have_received(:sh).with('brew install dummy')
+      end
     end
 
-    it do
-      HomebrewInstall.install('dummy')
-      expect(HomebrewInstall).to have_received(:sh).with('brew install dummy')
+    context "when do not need install" do
+      before do
+        allow(HomebrewInstall).to receive(:puts)
+        allow(HomebrewInstall).to receive(:check).and_return(false)
+      end
+
+      it do
+        subject
+        expect(HomebrewInstall).to have_received(:puts).with('skip install dummy')
+      end
     end
   end
 
