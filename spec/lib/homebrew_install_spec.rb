@@ -96,4 +96,19 @@ describe 'Homebrew install tests' do
       it { is_expected.to be_truthy }
     end
   end
+
+  describe "#install_or_upgrade" do
+    subject(:install_or_upgrade) { HomebrewInstall.install_or_upgrade('dummy') }
+
+    before do
+      allow(HomebrewInstall).to receive(:install)
+      allow(HomebrewInstall).to receive(:upgrade)
+    end
+
+    it do
+      subject
+      expect(HomebrewInstall).to have_received(:install).once
+      expect(HomebrewInstall).to have_received(:upgrade).once
+    end
+  end
 end
