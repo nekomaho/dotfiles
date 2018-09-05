@@ -30,4 +30,30 @@ describe 'DefaultShellSetting tests' do
       end
     end
   end
+
+  describe "#already_setting?" do
+    subject(:setting) {DefaultShellSetting.already_setting?('/dummy/pass')}
+
+    context "when include shell pass in ETC_SHELL" do
+      before do
+        allow(File).to receive_message_chain(:open, :read).and_return(<<~FILEPATH)
+        /dummy/pass
+        /dummy/hoge
+       FILEPATH
+      end
+
+      it { is_expected.to be_truthy }
+    end
+
+    context "when not include shell pass in ETC_SHELL" do
+      before do
+        allow(File).to receive_message_chain(:open, :read).and_return(<<~FILEPATH)
+        /dummy/hoge
+        /dummy/kuga
+        FILEPATH
+      end
+
+      it { is_expected.to be_falsy }
+    end
+  end
 end
