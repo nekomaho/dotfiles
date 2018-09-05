@@ -32,7 +32,7 @@ describe 'DefaultShellSetting tests' do
   end
 
   describe "#already_setting?" do
-    subject(:setting) {DefaultShellSetting.already_setting?('/dummy/pass')}
+    subject(:already_setting) {DefaultShellSetting.already_setting?('/dummy/pass')}
 
     context "when include shell pass in ETC_SHELL" do
       before do
@@ -55,5 +55,15 @@ describe 'DefaultShellSetting tests' do
 
       it { is_expected.to be_falsy }
     end
+  end
+
+  describe "#get_password" do
+    subject(:get_pasword) {DefaultShellSetting.get_password}
+
+    before do
+      allow(Readline).to receive(:readline).and_return('password')
+    end
+
+    it { is_expected.to eq 'password' }
   end
 end
