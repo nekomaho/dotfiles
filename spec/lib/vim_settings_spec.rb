@@ -17,4 +17,19 @@ describe 'VimInstall tests' do
       expect(VimInstall).to have_received(:vim_make).with('/vim/app/path')
     end
   end
+
+  describe "#install" do
+    subject(:install) {VimInstall.install('/vim/clone/path')}
+
+    before do
+      allow(VimInstall).to receive(:cd)
+      allow(VimInstall).to receive(:make_install)
+    end
+
+    it do
+      subject
+      expect(VimInstall).to have_received(:cd).with('/vim/clone/path')
+      expect(VimInstall).to have_received(:make_install)
+    end
+  end
 end
