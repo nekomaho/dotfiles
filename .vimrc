@@ -15,6 +15,7 @@ set nocursorcolumn
 set norelativenumber
 set splitright
 set termwinscroll=100000
+set incsearch
 
 "End set config
 "Key map config
