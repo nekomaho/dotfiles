@@ -134,7 +134,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('tpope/vim-rails')
   call dein#add('tmhedberg/matchit') "extension % command
   call dein#add('tpope/vim-surround') "extension text object
-  call dein#add('slim-template/vim-slim') "slim syntax hightlight
+  call dein#add('slim-template/vim-slim') "slim syntax highlight
   call dein#add('simeji/winresizer') "vim windows resize plugin
   call dein#add('vim-airline/vim-airline')  " Lean & mean status/tabline for vim that's light as air.
   call dein#add('vim-airline/vim-airline-themes')  " airline themes
@@ -149,7 +149,10 @@ if dein#load_state(vimbundle_path)
   call dein#add('airblade/vim-gitgutter') "git diff tool
   call dein#add('cohama/agit.vim') "git log viewr
   call dein#add('kchmck/vim-coffee-script') " coffee script syntax highlight
-
+  call dein#add('pangloss/vim-javascript') "javascript indent
+  call dein#add('maxmellon/vim-jsx-pretty') " jsx syntax highlight
+  call dein#add('marijnh/tern_for_vim') " js auto complete
+  call dein#add('othree/javascript-libraries-syntax.vim') "JS library syntax
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')

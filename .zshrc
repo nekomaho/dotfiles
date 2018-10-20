@@ -1,6 +1,9 @@
 # config pass
 PATH=/usr/local/mysql/bin:$PATH
 PATH=$HOME/app/bin/:/usr/local/bin:$HOME/.rbenv/bin:$PATH
+PATH=$HOME/.nodebrew/current/bin:$PATH
+PATH=/usr/local/opt/icu4c/bin:$PATH
+PATH=/usr/local/opt/icu4c/sbin:$PATH
 export PATH
 eval "$(rbenv init -)"
 
