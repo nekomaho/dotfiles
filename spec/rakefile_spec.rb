@@ -37,6 +37,7 @@ describe 'Rakefile tests' do
         expect(@rake['install'].sources).to include 'vim_install'
         expect(@rake['install'].sources).to include 'ag_install'
         expect(@rake['install'].sources).to include 'global_install'
+        expect(@rake['install'].sources).to include 'nodebrew_install'
       end
     end
   end
@@ -151,6 +152,12 @@ describe 'Rakefile tests' do
   describe 'pygments install' do
      it 'is install pygments' do
       expect(@rake['pygments'].invoke[0].call).to eq 'pygments'
+    end
+  end
+
+  describe 'nodebrew install' do
+     it 'is install nodebrew' do
+      expect(@rake['nodebrew'].invoke[0].call).to eq 'nodebrew'
     end
   end
 

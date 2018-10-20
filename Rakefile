@@ -10,7 +10,7 @@ desc 'install all'
 task default: :install
 
 desc 'install each application'
-task :install => [:make_dir, :zsh_install, :vim_install, :ag_install, :global_install]
+task :install => [:make_dir, :zsh_install, :vim_install, :ag_install, :global_install, :nodebrew_install]
 
 desc 'install related zsh'
 task :zsh_install => [:zsh, :zsh_completions, conf.zshrc_home_path] do
@@ -41,6 +41,11 @@ end
 desc 'install relaated silver bullet(ag)'
 task :ag_install do
   HomebrewInstall.install_or_upgrade("the_silver_searcher")
+end
+
+desc 'install nodebrew'
+task :nodebrew do
+  HomebrewInstall.install_or_upgrade("nodebrew")
 end
 
 desc 'install lua that need vim'
