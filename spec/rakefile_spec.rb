@@ -31,13 +31,14 @@ describe 'Rakefile tests' do
 
   describe 'install all app task' do
     describe 'install all app dependency' do
-      it 'is dependent make_dir, zsh_install, vim_install, ag_install, global_install' do
+      it 'is dependent make_dir, zsh_install, vim_install, ag_install, global_install, nodebrew, tmux' do
         expect(@rake['install'].sources).to include 'make_dir'
         expect(@rake['install'].sources).to include 'zsh_install'
         expect(@rake['install'].sources).to include 'vim_install'
         expect(@rake['install'].sources).to include 'ag_install'
         expect(@rake['install'].sources).to include 'global_install'
-        expect(@rake['install'].sources).to include 'nodebrew_install'
+        expect(@rake['install'].sources).to include 'nodebrew'
+        expect(@rake['install'].sources).to include 'tmux'
       end
     end
   end
@@ -161,6 +162,12 @@ describe 'Rakefile tests' do
     end
   end
 
+  describe 'tmux install' do
+     it 'is install tmux' do
+      expect(@rake['tmux'].invoke[0].call).to eq 'tmux'
+    end
+  end
+
   describe 'make directory' do
     describe 'make directory dependency' do
       it 'is dotfiles_dir, conf.src, conf.app, conf.fixhowm' do
@@ -226,6 +233,33 @@ describe 'Rakefile tests' do
         expect(FileTest.symlink?(conf.vimrc_home_path)).to be_truthy
       end
     end
+
+    describe 'copy tmux.conf to tmux_conf_path' do
+      after do
+        File.delete(conf.tmux_conf_path)
+      end
+
+      it 'is exist .vimrc to vimrc_path' do
+        @rake[conf.tmux_conf_path].invoke
+        expect(FileTest.exist?(conf.tmux_conf_path)).to be_truthy
+      end
+    end
+
+    describe 'create symblic link to tmux_home_path to tmux_conf_path' do
+      before do
+        FileUtils.touch(conf.tmux_conf_path)
+      end
+
+      after do
+        File.delete(conf.tmux_home_path)
+        File.delete(conf.tmux_conf_path)
+      end
+
+      it 'is symbolic link of tmux_conf_path' do
+        @rake[conf.tmux_home_path].invoke
+        expect(FileTest.symlink?(conf.tmux_home_path)).to be_truthy
+      end
+    end
   end
 
   describe 'upgrade' do
@@ -237,6 +271,8 @@ describe 'Rakefile tests' do
           expect(@rake['upgrade:all'].sources).to include 'vim_upgrade'
           expect(@rake['upgrade:all'].sources).to include 'rake:ag_install'
           expect(@rake['upgrade:all'].sources).to include 'global_upgrade'
+          expect(@rake['upgrade:all'].sources).to include 'rake:nodebrew'
+          expect(@rake['upgrade:all'].sources).to include 'rake:tmux'
         end
       end
     end

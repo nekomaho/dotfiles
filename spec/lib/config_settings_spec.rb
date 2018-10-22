@@ -38,4 +38,16 @@ describe "ConfigSettings test" do
       expect(config.vim_install_path).to eq("/Users/hoge/app/bin/vim")
     end
   end
+
+  describe "#tmux_home_path" do
+    it 'is return tmux home path' do
+      expect(config.tmux_home_path).to eq("#{ENV["HOME"]}/.tmux.conf")
+    end
+  end
+
+  describe "#tmux_conf_path" do
+    it 'is return tmux path' do
+      expect(config.tmux_conf_path).to eq("#{ENV["HOME"]}/.dotfiles/.tmux.conf")
+    end
+  end
 end

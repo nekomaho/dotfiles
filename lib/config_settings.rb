@@ -36,6 +36,14 @@ class ConfigSettings
     config[:VIM_INSTALL_PATH]
   end
 
+  def tmux_home_path
+    "#{home}/.tmux.conf"
+  end
+
+  def tmux_conf_path
+    "#{@dotfiles_dir}/.tmux.conf"
+  end
+
   private
 
   def home

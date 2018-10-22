@@ -10,7 +10,7 @@ desc 'install all'
 task default: :install
 
 desc 'install each application'
-task :install => [:make_dir, :zsh_install, :vim_install, :ag_install, :global_install, :nodebrew_install]
+task :install => [:make_dir, :zsh_install, :vim_install, :ag_install, :global_install, :nodebrew, :tmux]
 
 desc 'install related zsh'
 task :zsh_install => [:zsh, :zsh_completions, conf.zshrc_home_path] do
@@ -41,6 +41,11 @@ end
 desc 'install relaated silver bullet(ag)'
 task :ag_install do
   HomebrewInstall.install_or_upgrade("the_silver_searcher")
+end
+
+desc 'install tmux'
+task :tmux  => [conf.tmux_home_path ] do
+  HomebrewInstall.install_or_upgrade("tmux")
 end
 
 desc 'install nodebrew'
@@ -105,9 +110,19 @@ end
 
 file '.vimrc'
 
+file conf.tmux_home_path => conf.tmux_conf_path do
+  ln_s conf.tmux_conf_path, conf.tmux_home_path, force: :true
+end
+
+file conf.tmux_conf_path => '.tmux.conf' do
+  cp '.tmux.conf', conf.tmux_conf_path
+end
+
+file '.tmux.conf'
+
 namespace :upgrade do
   desc 'upgrade all application'
-  task :all => ["rake:make_dir", :zsh_upgrade, :vim_upgrade, "rake:ag_install", :global_upgrade]
+  task :all => ["rake:make_dir", :zsh_upgrade, :vim_upgrade, "rake:ag_install", :global_upgrade, "rake:nodebrew", "rake:tmux"]
 
   desc 'upgrade zsh releated application'
   task :zsh_upgrade => ["rake:zsh", "rake:zsh_completions", conf.zshrc_home_path] do
