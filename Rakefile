@@ -10,7 +10,7 @@ desc 'install all'
 task default: :install
 
 desc 'install each application'
-task :install => [:make_dir, :zsh_install, :vim_install, :ag_install, :global_install, :nodebrew, :tmux]
+task :install => [:make_dir, :zsh_install, :vim_install, :ag_install, :ctags_install, :nodebrew, :tmux]
 
 desc 'install related zsh'
 task :zsh_install => [:zsh, :zsh_completions, conf.zshrc_home_path] do
@@ -20,8 +20,8 @@ end
 desc 'insatll releated vim'
 task :vim_install => [:dein]
 
-desc 'insatll related global'
-task :global_install => [:global, :exuberant_ctags, :pygments]
+desc 'insatll related ctags'
+task :ctags_install => [:ctags]
 
 desc 'install dein that plugin of vim'
 task :dein => [:vim] do
@@ -68,19 +68,9 @@ task :zsh_completions do
   HomebrewInstall.install_or_upgrade("zsh-completions")
 end
 
-desc 'insall global that source code tagging system'
-task :global do
-  HomebrewInstall.install_or_upgrade("global")
-end
-
-desc 'install ctags taht source code tagging'
-task :exuberant_ctags do
-  HomebrewInstall.install_or_upgrade("exuberant-ctags")
-end
-
-desc 'install pygments that syntax highlight system'
-task :pygments do
-  HomebrewInstall.install_or_upgrade("pygments")
+desc 'insall ctags that source code tagging system'
+task :ctags do
+  HomebrewInstall.install("--HEAD universal-ctags/universal-ctags/universal-ctags")
 end
 
 desc 'make need directory'
@@ -122,7 +112,7 @@ file '.tmux.conf'
 
 namespace :upgrade do
   desc 'upgrade all application'
-  task :all => ["rake:make_dir", :zsh_upgrade, :vim_upgrade, "rake:ag_install", :global_upgrade, "rake:nodebrew", "rake:tmux"]
+  task :all => ["rake:make_dir", :zsh_upgrade, :vim_upgrade, "rake:ag_install", :ctags_upgrade, "rake:nodebrew", "rake:tmux"]
 
   desc 'upgrade zsh releated application'
   task :zsh_upgrade => ["rake:zsh", "rake:zsh_completions", conf.zshrc_home_path] do
@@ -132,8 +122,10 @@ namespace :upgrade do
   desc 'upgrade vim releated application'
   task :vim_upgrade => [:dein_upgrade]
 
-  desc 'upgrade global releated application'
-  task :global_upgrade => ["rake:global", "rake:exuberant_ctags", "rake:pygments"]
+  desc 'upgrade ctags application'
+  task :ctags_upgrade do
+    HomebrewInstall.upgrade("universal-ctags")
+  end
 
   desc 'upgrade dein that plugin of vim'
   task :dein_upgrade => [:vim] do

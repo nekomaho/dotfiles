@@ -31,12 +31,12 @@ describe 'Rakefile tests' do
 
   describe 'install all app task' do
     describe 'install all app dependency' do
-      it 'is dependent make_dir, zsh_install, vim_install, ag_install, global_install, nodebrew, tmux' do
+      it 'is dependent make_dir, zsh_install, vim_install, ag_install, ctags_install, nodebrew, tmux' do
         expect(@rake['install'].sources).to include 'make_dir'
         expect(@rake['install'].sources).to include 'zsh_install'
         expect(@rake['install'].sources).to include 'vim_install'
         expect(@rake['install'].sources).to include 'ag_install'
-        expect(@rake['install'].sources).to include 'global_install'
+        expect(@rake['install'].sources).to include 'ctags_install'
         expect(@rake['install'].sources).to include 'nodebrew'
         expect(@rake['install'].sources).to include 'tmux'
       end
@@ -53,12 +53,10 @@ describe 'Rakefile tests' do
     end
   end
 
-  describe 'install related global' do
-    describe 'global install dependency' do
-      it 'is dependent global, exuberant_ctags and pygments' do
-        expect(@rake['global_install'].sources).to include 'global'
-        expect(@rake['global_install'].sources).to include 'exuberant_ctags'
-        expect(@rake['global_install'].sources).to include 'pygments'
+  describe 'install related ctags' do
+    describe 'ctags install dependency' do
+      it 'is dependent ctags' do
+        expect(@rake['ctags_install'].sources).to include 'ctags'
       end
     end
   end
@@ -138,21 +136,9 @@ describe 'Rakefile tests' do
     end
   end
 
-  describe 'global install' do
-    it 'is install global' do
-      expect(@rake['global'].invoke[0].call).to eq 'global'
-    end
-  end
-
   describe 'ctags install' do
     it 'is install ctags' do
-      expect(@rake['exuberant_ctags'].invoke[0].call).to eq 'exuberant-ctags'
-    end
-  end
-
-  describe 'pygments install' do
-     it 'is install pygments' do
-      expect(@rake['pygments'].invoke[0].call).to eq 'pygments'
+      expect(@rake['ctags'].invoke[0].call).to eq '--HEAD universal-ctags/universal-ctags/universal-ctags'
     end
   end
 
@@ -265,12 +251,12 @@ describe 'Rakefile tests' do
   describe 'upgrade' do
     describe 'upgrade all app task' do
       describe 'upgrade all app dependency' do
-        it 'is dependent make_dir, zsh_upgrade, vim_upgrade, ag_install, global_upgrade' do
+        it 'is dependent make_dir, zsh_upgrade, vim_upgrade, ag_install, ctags_upgrade' do
           expect(@rake['upgrade:all'].sources).to include 'rake:make_dir'
           expect(@rake['upgrade:all'].sources).to include 'zsh_upgrade'
           expect(@rake['upgrade:all'].sources).to include 'vim_upgrade'
           expect(@rake['upgrade:all'].sources).to include 'rake:ag_install'
-          expect(@rake['upgrade:all'].sources).to include 'global_upgrade'
+          expect(@rake['upgrade:all'].sources).to include 'ctags_upgrade'
           expect(@rake['upgrade:all'].sources).to include 'rake:nodebrew'
           expect(@rake['upgrade:all'].sources).to include 'rake:tmux'
         end
@@ -287,12 +273,10 @@ describe 'Rakefile tests' do
       end
     end
 
-    describe 'upgrade related global' do
-      describe 'global upgrade dependency' do
-        it 'is dependent global, exuberant_ctags and pygments' do
-          expect(@rake['upgrade:global_upgrade'].sources).to include 'rake:global'
-          expect(@rake['upgrade:global_upgrade'].sources).to include 'rake:exuberant_ctags'
-          expect(@rake['upgrade:global_upgrade'].sources).to include 'rake:pygments'
+    describe 'upgrade ctags' do
+      describe 'ctags upgrade dependency' do
+        it 'is dependent ctags' do
+          expect(@rake['upgrade:ctags_upgrade'].invoke[0].call).to eq 'universal-ctags'
         end
       end
     end
