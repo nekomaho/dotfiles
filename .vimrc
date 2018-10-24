@@ -16,6 +16,7 @@ set norelativenumber
 set splitright
 set termwinscroll=100000
 set incsearch
+set redrawtime=5000
 
 "End set config
 "Key map config
