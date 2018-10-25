@@ -46,6 +46,8 @@ inoremap ;; ;
 inoremap <silent> jj <ESC>
 " when Japanese input
 inoremap <silent> っｊ <ESC>
+" for ctags jump
+nnoremap <C-]> g<C-]>
 
 " gtags key binds
 augroup gtagsKeySetting
