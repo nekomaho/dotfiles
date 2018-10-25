@@ -57,6 +57,7 @@ describe 'Rakefile tests' do
     describe 'ctags install dependency' do
       it 'is dependent ctags' do
         expect(@rake['ctags_install'].sources).to include 'ctags'
+        expect(@rake['ctags_install'].sources).to include "#{conf.ctags_home_path}"
       end
     end
   end
@@ -225,7 +226,7 @@ describe 'Rakefile tests' do
         File.delete(conf.tmux_conf_path)
       end
 
-      it 'is exist .vimrc to vimrc_path' do
+      it 'is exist .tmux.conf to tmux_conf_path' do
         @rake[conf.tmux_conf_path].invoke
         expect(FileTest.exist?(conf.tmux_conf_path)).to be_truthy
       end
@@ -244,6 +245,33 @@ describe 'Rakefile tests' do
       it 'is symbolic link of tmux_conf_path' do
         @rake[conf.tmux_home_path].invoke
         expect(FileTest.symlink?(conf.tmux_home_path)).to be_truthy
+      end
+    end
+
+    describe 'copy ctags to tmux_conf_path' do
+      after do
+        File.delete(conf.ctags_path)
+      end
+
+      it 'is exist .ctags to ctags_path' do
+        @rake[conf.ctags_path].invoke
+        expect(FileTest.exist?(conf.ctags_path)).to be_truthy
+      end
+    end
+
+    describe 'create symblic link to ctags_home_path to ctags_path' do
+      before do
+        FileUtils.touch(conf.ctags_path)
+      end
+
+      after do
+        File.delete(conf.ctags_home_path)
+        File.delete(conf.ctags_path)
+      end
+
+      it 'is symbolic link of ctags_path' do
+        @rake[conf.ctags_home_path].invoke
+        expect(FileTest.symlink?(conf.ctags_home_path)).to be_truthy
       end
     end
   end
@@ -276,6 +304,7 @@ describe 'Rakefile tests' do
     describe 'upgrade ctags' do
       describe 'ctags upgrade dependency' do
         it 'is dependent ctags' do
+          expect(@rake['upgrade:ctags_upgrade'].sources).to include "#{conf.ctags_home_path}"
           expect(@rake['upgrade:ctags_upgrade'].invoke[0].call).to eq 'universal-ctags'
         end
       end

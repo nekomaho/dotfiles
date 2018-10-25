@@ -1,0 +1,25 @@
+--regex-ruby=/(^|[::])[\t]*([A-Z][[:alnum:]_]+)*=/\2/c,class,constant/
+--regex-ruby=/(^|:)[ \t]*(has_many|belongs_to|has_one|has_and_belongs_to_many)\(? *:([[:alnum:]_]+)/\3/f,method,association/
+--regex-ruby=/(^|:)[\t]*(named_)?scope\(? *:([[:alnum:]_]+)/\3/f,method,named_scope/
+
+--langmap=css:+.scss
+--langmap=css:+.sass
+--langmap=css:+.styl
+--langmap=css:+.less
+--regex-css=/^[\t]*(([A-Za-z0-9_-]+[\t\n,]+)+)\{/\1/t,tag,tags/
+--regex-css=/^[\t]*#([A-Za-z0-9_-]+)/#\1/i,id,ids/
+--regex-css=/^[\t]*\.([A-Za-z0-9_-]+)/.\1/c,class,classes/
+
+--langdef=SCSS
+--langmap=SCSS:.scss
+--regex-SCSS=/^\s*\$([a-zA-Z_][a-zA-Z0-9_]+)/\1/d,var/
+
+--exclude=node_modules
+--exclude=dist
+--exclude=.git
+--exclude=.session.vim
+--exclude=package.json
+--exclude=webpack.config.babel.js
+--exclude=postcss.config.js
+--exclude=yarn.lock
+--exclude=config.js

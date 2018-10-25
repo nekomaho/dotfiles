@@ -44,6 +44,18 @@ class ConfigSettings
     "#{@dotfiles_dir}/.tmux.conf"
   end
 
+  def ctags_d_path
+    "#{home}/.ctags.d/"
+  end
+
+  def ctags_home_path
+    "#{ctags_d_path}/defalut.ctags"
+  end
+
+  def ctags_path
+    "#{@dotfiles_dir}/default.ctags"
+  end
+
   private
 
   def home

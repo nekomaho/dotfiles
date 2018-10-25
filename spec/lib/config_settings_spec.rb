@@ -50,4 +50,16 @@ describe "ConfigSettings test" do
       expect(config.tmux_conf_path).to eq("#{ENV["HOME"]}/.dotfiles/.tmux.conf")
     end
   end
+
+  describe "#ctags_home_path" do
+    it 'is return ctags home path' do
+      expect(config.ctags_home_path).to eq("#{ENV["HOME"]}/.ctags")
+    end
+  end
+
+  describe "#ctags_conf_path" do
+    it 'is return ctags path' do
+      expect(config.ctags_path).to eq("#{ENV["HOME"]}/.dotfiles/.ctags")
+    end
+  end
 end

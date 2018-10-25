@@ -21,7 +21,7 @@ desc 'insatll releated vim'
 task :vim_install => [:dein]
 
 desc 'insatll related ctags'
-task :ctags_install => [:ctags]
+task :ctags_install => [:ctags, conf.ctags_home_path]
 
 desc 'install dein that plugin of vim'
 task :dein => [:vim] do
@@ -74,11 +74,12 @@ task :ctags do
 end
 
 desc 'make need directory'
-task :make_dir => [conf.dotfiles_dir, conf.src, conf.app, conf.qfixhowm_path]
+task :make_dir => [conf.dotfiles_dir, conf.src, conf.app, conf.qfixhowm_path, conf.ctags_d_path]
 directory conf.dotfiles_dir
 directory conf.src
 directory conf.app
 directory conf.qfixhowm_path
+directory conf.ctags_d_path
 
 file conf.zshrc_home_path => conf.zshrc_path do
   ln_s conf.zshrc_path, conf.zshrc_home_path, force: :true
@@ -99,6 +100,16 @@ file conf.vimrc_path => '.vimrc' do
 end
 
 file '.vimrc'
+
+file conf.ctags_home_path => conf.ctags_path do
+  ln_s conf.ctags_path, conf.ctags_home_path, force: :true
+end
+
+file conf.ctags_path => 'default.ctags' do
+  cp 'default.ctags', conf.ctags_path
+end
+
+file 'default.ctags'
 
 file conf.tmux_home_path => conf.tmux_conf_path do
   ln_s conf.tmux_conf_path, conf.tmux_home_path, force: :true
@@ -123,7 +134,7 @@ namespace :upgrade do
   task :vim_upgrade => [:dein_upgrade]
 
   desc 'upgrade ctags application'
-  task :ctags_upgrade do
+  task :ctags_upgrade => [conf.ctags_home_path] do
     HomebrewInstall.upgrade("universal-ctags")
   end
 

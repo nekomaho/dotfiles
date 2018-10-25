@@ -9,32 +9,42 @@ class  VimInstall
 
   def self.build(clone_path, app_path)
     sh("git clone #{VIM_GIT_URL} #{clone_path}")
+    current_path = pwd
     cd clone_path
     vim_make(app_path)
+    cd current_path
   end
  
   def self.install(clone_path)
+    current_path = pwd
     cd clone_path
     make_install
+    cd current_path
   end
 
   def self.test(clone_path)
+    current_path = pwd
     cd clone_path
     make_test
+    cd current_path
   end
 
   def self.update(clone_path, app_path)
+    current_path = pwd
     cd clone_path
     sh("git pull")
     make_clean
     vim_make(app_path)
+    cd current_path
   end
 
   def self.dein(clone_path, app_path)
     dein_clone_path =  clone_path+'/dein'
     if File.exists?(dein_clone_path)
+      current_path = pwd
       cd dein_clone_path
       sh("git pull")
+      cd current_path
     else
       sh("git clone #{DEIN_GIT_URL} #{dein_clone_path}")
     end
