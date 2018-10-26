@@ -70,7 +70,7 @@ end
 
 desc 'insall ctags that source code tagging system'
 task :ctags do
-  HomebrewInstall.install("--HEAD universal-ctags/universal-ctags/universal-ctags")
+  HomebrewInstall.install("universal-ctags", options: { install_name: "--HEAD universal-ctags/universal-ctags/universal-ctags" })
 end
 
 desc 'make need directory'

@@ -1,12 +1,15 @@
 require 'open3'
+require 'pry'
 
 class  HomebrewInstall
   extend Rake::DSL
 
   class << self
-    def install(app)
+    def install(app, options: {})
+      install_name = options.fetch(:install_name)
+      install_name = app if install_name.nil?
       Bundler.with_original_env do
-        return sh("brew install #{app}") if check(app)
+        return sh("brew install #{install_name}") if check(app)
         puts("skip install #{app}")
       end
     end
