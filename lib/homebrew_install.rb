@@ -6,7 +6,7 @@ class  HomebrewInstall
 
   class << self
     def install(app, options: {})
-      install_name = options.fetch(:install_name)
+      install_name = options.fetch(:install_name, nil)
       install_name = app if install_name.nil?
       Bundler.with_original_env do
         return sh("brew install #{install_name}") if check(app)
