@@ -13,6 +13,7 @@ class  VimInstall
     cd clone_path
     vim_make(app_path)
     cd current_path
+    install(clone_path)
   end
  
   def self.install(clone_path)
@@ -32,10 +33,14 @@ class  VimInstall
   def self.update(clone_path, app_path)
     current_path = pwd
     cd clone_path
-    sh("git pull")
+    if git_pull_with_already_up_to_date_check
+      puts "Already installed newest vim"
+      return
+    end
     make_clean
     vim_make(app_path)
     cd current_path
+    install(clone_path)
   end
 
   def self.dein(clone_path, app_path)
@@ -43,7 +48,7 @@ class  VimInstall
     if File.exists?(dein_clone_path)
       current_path = pwd
       cd dein_clone_path
-      sh("git pull")
+      git_pull_with_already_up_to_date_check
       cd current_path
     else
       sh("git clone #{DEIN_GIT_URL} #{dein_clone_path}")
@@ -62,5 +67,9 @@ class  VimInstall
       " --with-lua-prefix=/usr/local"
     configure(config_str)
     make
+  end
+
+  def self.git_pull_with_already_up_to_date_check
+    Open3.capture3("git pull")[0] =~ /Already up to date/
   end
 end

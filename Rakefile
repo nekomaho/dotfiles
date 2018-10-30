@@ -35,7 +35,6 @@ task :vim => [conf.vimrc_home_path, :lua ] do
   else
     VimInstall.build(conf.vim_clone_path,conf.app)
   end
-  VimInstall.install(conf.vim_clone_path)
 end
 
 desc 'install relaated silver bullet(ag)'
@@ -150,6 +149,5 @@ namespace :upgrade do
     else
       VimInstall.build(conf.vim_clone_path,conf.app)
     end
-    VimInstall.install(conf.vim_clone_path)
   end
 end
