@@ -35,6 +35,7 @@ class  VimInstall
     cd clone_path
     if git_pull_with_already_up_to_date_check
       puts "Already installed newest vim"
+      cd current_path
       return
     end
     make_clean
