@@ -112,7 +112,6 @@ endif
 let vimbundle_path='~/.dotfiles'
 let dein_vim_path='~/.dotfiles/dein'
 
-
 " Required:
 set runtimepath+=~/.dotfiles/dein
 
@@ -158,6 +157,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('othree/javascript-libraries-syntax.vim') "JS library syntax
   call dein#add('tyru/open-browser-github.vim') " for open github
   call dein#add('tyru/open-browser.vim') " for open github
+  call dein#add('panozzaj/vim-autocorrect') " auto correct missspelling
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')
@@ -173,6 +173,14 @@ endif
 " Required:
 filetype plugin indent on
 syntax enable
+
+" Dictionary setting
+autocmd FileType ruby :set dictionary='~/.dotfiles/dict/ruby/dicts'
+set complete+=k
+augroup setting_auto_correct
+  autocmd!
+  autocmd BufRead,BufNewFile * call AutoCorrect()
+augroup END
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
