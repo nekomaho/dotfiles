@@ -28,6 +28,10 @@ class ConfigSettings
     "#{home}/.vimrc"
   end
 
+  def vimrc_vim_dir
+    "#{home}/.vim/"
+  end
+
   def vimrc_path
     "#{@dotfiles_dir}/.vimrc"
   end

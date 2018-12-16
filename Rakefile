@@ -29,13 +29,18 @@ task :dein => [:vim] do
 end
 
 desc 'install vim'
-task :vim => [conf.vimrc_home_path, :lua ] do
+task :vim => [conf.vimrc_home_path, :lua ,:vimfiles] do
   if File.exists?(conf.vim_clone_path)
     VimInstall.update(conf.vim_clone_path,conf.app)
   else
     VimInstall.build(conf.vim_clone_path,conf.app)
   end
 end
+
+
+VIM_FILES = FileList.new("~/.vim/*.vim")
+desc 'install vim files'
+task :vimfiles => VIM_FILES
 
 desc 'install relaated silver bullet(ag)'
 task :ag_install do
@@ -79,6 +84,17 @@ directory conf.src
 directory conf.app
 directory conf.qfixhowm_path
 directory conf.ctags_d_path
+directory conf.vimrc_vim_dir
+
+rule ".vim" => ->(f){ source_for_vim(f).ext("dummy") } do |t|
+  cp t.source, conf.vimrc_vim_dir
+end
+
+def source_for_vim(vim_file)
+  VIM_FILES.find do |f|
+    f == vim_file
+  end
+end
 
 file conf.zshrc_home_path => conf.zshrc_path do
   ln_s conf.zshrc_path, conf.zshrc_home_path, force: :true
@@ -143,7 +159,7 @@ namespace :upgrade do
   end
 
   desc 'upgrade vim releated application'
-  task :vim => [conf.vimrc_home_path, "rake:lua" ] do
+  task :vim => [conf.vimrc_home_path, "rake:lua", "rake:vimfiles" ] do
     if File.exists?(conf.vim_clone_path)
       VimInstall.update(conf.vim_clone_path,conf.app)
     else
