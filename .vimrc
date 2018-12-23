@@ -279,7 +279,6 @@ if executable('solargraph')
         \ 'whitelist': ['ruby'],
         \ })
     autocmd FileType ruby setlocal omnifunc=lsp#complete
-    autocmd CompleteDone rub if pumvisible() == 0 | pclose | endif
   augroup END
 endif
 
@@ -292,7 +291,6 @@ if executable('clangd')
         \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
         \ })
     autocmd FileType c,cpp setlocal omnifunc=lsp#complete
-    autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
   augroup END
 endif
 
@@ -304,5 +302,6 @@ let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 "asyncomplete settings
 let g:asyncomplete_smart_completion = 1
 let g:asyncomplete_auto_popup = 1
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 syntax sync minlines=256
