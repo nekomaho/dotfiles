@@ -1,14 +1,11 @@
 require 'fileutils'
 require './spec/base'
 require './spec/helper/config_settings_helper'
-require './spec/helper/homebrew_install_mock'
 require './spec/helper/vim_install_mock'
 
 describe 'Rakefile tests' do
 
   include ConfigSettingHelper
-  using HomebrewInstallMock
-  using VimInstallMock
 
   let(:conf) { ConfigSettings.new }
 
@@ -24,6 +21,15 @@ describe 'Rakefile tests' do
   end
 
   before(:each) do
+    allow(HomebrewInstall).to receive(:install).and_return(true)
+    allow(HomebrewInstall).to receive(:install_or_upgrade).and_return(true)
+    allow(HomebrewInstall).to receive(:upgrade).and_return(true)
+
+    allow(VimInstall).to receive(:update).and_return(true)
+    allow(VimInstall).to receive(:build).and_return(true)
+    allow(VimInstall).to receive(:install).and_return(true)
+    allow(VimInstall).to receive(:dein).and_return(true)
+
     @rake.tasks.each do |task|
       task.reenable
     end

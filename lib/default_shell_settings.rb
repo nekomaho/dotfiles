@@ -1,3 +1,5 @@
+require 'io/console'
+
 class DefaultShellSetting
   ETC_SHELL="/etc/shells"
 

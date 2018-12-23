@@ -58,7 +58,7 @@ describe 'DefaultShellSetting tests' do
   end
 
   describe "#get_password" do
-    subject(:get_pasword) {DefaultShellSetting.get_password}
+    subject(:get_pasword) { DefaultShellSetting.get_password }
 
     before do
       allow(Readline).to receive(:readline).and_return('password')
