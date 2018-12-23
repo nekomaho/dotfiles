@@ -295,9 +295,10 @@ if executable('clangd')
 endif
 
 let g:lsp_async_completion = 0
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
-let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+" when enable debuging lsp server
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = expand('~/vim-lsp.log')
+"let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 
 "asyncomplete settings
 let g:asyncomplete_smart_completion = 1
