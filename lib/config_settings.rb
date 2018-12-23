@@ -45,11 +45,11 @@ class ConfigSettings
   end
 
   def ctags_d_path
-    "#{home}/.ctags.d/"
+    "#{home}/.ctags.d"
   end
 
   def ctags_home_path
-    "#{ctags_d_path}/defalut.ctags"
+    "#{ctags_d_path}/default.ctags"
   end
 
   def ctags_path
