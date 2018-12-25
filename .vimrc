@@ -17,6 +17,8 @@ set splitright
 set termwinscroll=100000
 set incsearch
 set redrawtime=5000
+set wildmenu
+set wildmode=list
 
 "End set config
 "Key map config
@@ -158,6 +160,11 @@ if dein#load_state(vimbundle_path)
   call dein#add('tyru/open-browser-github.vim') " for open github
   call dein#add('tyru/open-browser.vim') " for open github
   call dein#add('panozzaj/vim-autocorrect') " auto correct missspelling
+  call dein#add('tpope/vim-obsession') " save session (with tumx)
+  call dein#add('prabirshrestha/async.vim') "for lsp
+  call dein#add('prabirshrestha/vim-lsp')  "for lsp
+  call dein#add('prabirshrestha/asyncomplete.vim')  "for auto-complete
+  call dein#add('prabirshrestha/asyncomplete-lsp.vim') "autopopup for lsp auto-complete
 
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')
@@ -260,5 +267,42 @@ try
   call unite#filters#matcher_default#use(['matcher_fuzzy'])
 catch
 endtry
+
+"vim-lsp settings
+if executable('solargraph')
+  augroup LspRuby
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'solargraph',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+        \ 'initialization_options': {"diagnostics": "true"},
+        \ 'whitelist': ['ruby'],
+        \ })
+    autocmd FileType ruby setlocal omnifunc=lsp#complete
+  augroup END
+endif
+
+if executable('clangd')
+  augroup LspCpp
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+    autocmd FileType c,cpp setlocal omnifunc=lsp#complete
+  augroup END
+endif
+
+let g:lsp_async_completion = 0
+" when enable debuging lsp server
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = expand('~/vim-lsp.log')
+"let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+
+"asyncomplete settings
+let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_auto_popup = 1
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 syntax sync minlines=256

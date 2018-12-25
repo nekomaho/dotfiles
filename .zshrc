@@ -4,8 +4,14 @@ PATH=$HOME/app/bin/:/usr/local/bin:$HOME/.rbenv/bin:$PATH
 PATH=$HOME/.nodebrew/current/bin:$PATH
 PATH=/usr/local/opt/icu4c/bin:$PATH
 PATH=/usr/local/opt/icu4c/sbin:$PATH
+PATH=/usr/local/opt/llvm/bin:$PATH
 export PATH
 eval "$(rbenv init -)"
+
+#LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
+
+#export LDFLAGS="-L/usr/local/opt/llvm/lib"
+#export CPPFLAGS="-I/usr/local/opt/llvm/include"
 
 # load extra settings
 # If environment dependent settings are required, create .local_zshrc and write it in it
