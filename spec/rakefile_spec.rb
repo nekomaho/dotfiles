@@ -1,10 +1,8 @@
 require 'fileutils'
 require './spec/base'
 require './spec/helper/config_settings_helper'
-require './spec/helper/vim_install_mock'
 
 describe 'Rakefile tests' do
-
   include ConfigSettingHelper
 
   let(:conf) { ConfigSettings.new }
@@ -24,6 +22,11 @@ describe 'Rakefile tests' do
     allow(HomebrewInstall).to receive(:install_or_upgrade)
     allow(HomebrewInstall).to receive(:install)
     allow(HomebrewInstall).to receive(:upgrade)
+
+    allow(VimInstall).to receive(:build)
+    allow(VimInstall).to receive(:update)
+    allow(VimInstall).to receive(:install)
+    allow(VimInstall).to receive(:dein)
 
     @rake.tasks.each do |task|
       task.reenable
@@ -72,13 +75,16 @@ describe 'Rakefile tests' do
 
     describe 'dein main install task' do
       describe 'dein install when update' do
+        subject { @rake['dein'].invoke[0] }
+
         before do
           # only test this task not dependency task
           @rake['dein'].clear_prerequisites
         end
 
         it 'is install dein' do
-          expect(@rake['dein'].invoke[0].call).to eq "#{conf.dotfiles_dir}"
+          subject
+          expect(VimInstall).to have_received(:dein).with("#{conf.dotfiles_dir}",'spec/tmp/app')
         end
       end
     end
@@ -93,25 +99,32 @@ describe 'Rakefile tests' do
     end
 
     describe 'vim main install task' do
+      subject { @rake['vim'].invoke[0] }
+
       before do
         # only test this task not dependency task
         @rake['vim'].clear_prerequisites
       end
 
       describe 'vim install when update' do
-        subject { @rake['vim'].invoke[0] }
+        before do
+          allow(File).to receive(:exists?).and_return(true)
+        end
 
         it 'is update vim' do
           subject
-          allow(File).to receive(:exist?).and_return(true)
-          expect(@rake['vim'].invoke[0].call).to eq "#{conf.vim_clone_path}"
+          expect(VimInstall).to have_received(:update).with("#{conf.vim_clone_path}","#{conf.app}")
         end
       end
 
       describe 'vim install when install' do
-        it 'is build  vim' do
-          allow(File).to receive(:exist?).and_return(false)
-          expect(@rake['vim'].invoke[0].call).to eq "#{conf.vim_clone_path}"
+        before do
+          allow(File).to receive(:exists?).and_return(false)
+        end
+
+       it 'is build  vim' do
+         subject
+          expect(VimInstall).to have_received(:build).with("#{conf.vim_clone_path}","#{conf.app}")
         end
       end
     end
@@ -331,7 +344,8 @@ describe 'Rakefile tests' do
         subject { @rake['upgrade:ctags_upgrade'].invoke[0] }
 
         it 'is dependent ctags' do
-          expect(subject.sources).to include "#{conf.ctags_home_path}"
+          expect(@rake['upgrade:ctags_upgrade'].sources).to include "#{conf.ctags_home_path}"
+          subject
           expect(HomebrewInstall).to have_received(:upgrade).with('universal-ctags')
         end
       end
@@ -346,13 +360,16 @@ describe 'Rakefile tests' do
 
       describe 'dein main upgrade task' do
         describe 'dein upgrade when update' do
+          subject { @rake['upgrade:dein_upgrade'].invoke[0] }
+
           before do
             # only test this task not dependency task
             @rake['upgrade:dein_upgrade'].clear_prerequisites
           end
 
           it 'is install dein' do
-            expect(@rake['upgrade:dein_upgrade'].invoke[0].call).to eq "#{conf.dotfiles_dir}"
+            subject
+            expect(VimInstall).to have_received(:dein).with("#{conf.dotfiles_dir}", "#{conf.app}")
           end
         end
       end
@@ -367,22 +384,32 @@ describe 'Rakefile tests' do
       end
 
       describe 'vim main upgrade task' do
+        subject { @rake['upgrade:vim'].invoke[0] }
+
         before do
           # only test this task not dependency task
           @rake['upgrade:vim'].clear_prerequisites
         end
 
         describe 'vim upgrade when update' do
+          before do
+            allow(File).to receive(:exists?).and_return(true)
+          end
+
           it 'is update vim' do
-            allow(File).to receive(:exist?).and_return(true)
-            expect(@rake['upgrade:vim'].invoke[0].call).to eq "#{conf.vim_clone_path}"
+            subject
+            expect(VimInstall).to have_received(:update).with("#{conf.vim_clone_path}", "#{conf.app}")
           end
         end
 
         describe 'vim upgrade when install' do
-          it 'is build  vim' do
-            allow(File).to receive(:exist?).and_return(false)
-            expect(@rake['upgrade:vim'].invoke[0].call).to eq "#{conf.vim_clone_path}"
+          before do
+            allow(File).to receive(:exists?).and_return(false)
+          end
+
+         it 'is build  vim' do
+            subject
+            expect(VimInstall).to have_received(:build).with("#{conf.vim_clone_path}", "#{conf.app}")
           end
         end
       end
