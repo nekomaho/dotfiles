@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 gem 'rake'
 
-group :development do
+group :development, :test do
   gem 'rb-readline'
   gem 'pry-doc'
   gem 'pry'
