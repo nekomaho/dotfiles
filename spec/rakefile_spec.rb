@@ -21,14 +21,9 @@ describe 'Rakefile tests' do
   end
 
   before(:each) do
-    allow(HomebrewInstall).to receive(:install).and_return(true)
-    allow(HomebrewInstall).to receive(:install_or_upgrade).and_return(true)
-    allow(HomebrewInstall).to receive(:upgrade).and_return(true)
-
-    allow(VimInstall).to receive(:update).and_return(true)
-    allow(VimInstall).to receive(:build).and_return(true)
-    allow(VimInstall).to receive(:install).and_return(true)
-    allow(VimInstall).to receive(:dein).and_return(true)
+    allow(HomebrewInstall).to receive(:install_or_upgrade)
+    allow(HomebrewInstall).to receive(:install)
+    allow(HomebrewInstall).to receive(:upgrade)
 
     @rake.tasks.each do |task|
       task.reenable
@@ -104,7 +99,10 @@ describe 'Rakefile tests' do
       end
 
       describe 'vim install when update' do
+        subject { @rake['vim'].invoke[0] }
+
         it 'is update vim' do
+          subject
           allow(File).to receive(:exist?).and_return(true)
           expect(@rake['vim'].invoke[0].call).to eq "#{conf.vim_clone_path}"
         end
@@ -120,44 +118,65 @@ describe 'Rakefile tests' do
   end
 
   describe 'ag install' do
+    subject { @rake['ag_install'].invoke[0] }
+
     it 'is install ag' do
-      expect(@rake['ag_install'].invoke[0].call).to eq 'the_silver_searcher'
+      subject
+      expect(HomebrewInstall).to have_received(:install_or_upgrade).with('the_silver_searcher')
     end
   end
 
   describe 'zsh install' do
+    subject { @rake['zsh'].invoke[0] }
+
     it 'is install zsh' do
-      expect(@rake['zsh'].invoke[0].call).to eq 'zsh'
+      subject
+      expect(HomebrewInstall).to have_received(:install_or_upgrade).with('zsh')
     end
 
     describe 'zsh completions install' do
-      it 'is install zsh' do
-        expect(@rake['zsh_completions'].invoke[0].call).to eq 'zsh-completions'
+      subject { @rake['zsh_completions'].invoke[0] }
+
+      it 'is install zsh_completions' do
+        subject
+        expect(HomebrewInstall).to have_received(:install_or_upgrade).with('zsh-completions')
       end
     end
   end
 
   describe 'lua install' do
+    subject { @rake['lua'].invoke[0] }
+
     it 'is install lua' do
-      expect(@rake['lua'].invoke[0].call).to eq 'lua'
+      subject
+      expect(HomebrewInstall).to have_received(:install_or_upgrade).with('lua')
     end
   end
 
   describe 'ctags install' do
+    subject { @rake['ctags'].invoke[0] }
+
     it 'is install ctags' do
-      expect(@rake['ctags'].invoke[0].call).to eq '--HEAD universal-ctags/universal-ctags/universal-ctags'
+      subject
+      expect(HomebrewInstall).to have_received(:install).with('universal-ctags', options: { install_name: "--HEAD universal-ctags/universal-ctags/universal-ctags" } )
     end
   end
 
   describe 'nodebrew install' do
-     it 'is install nodebrew' do
-      expect(@rake['nodebrew'].invoke[0].call).to eq 'nodebrew'
+    subject { @rake['nodebrew'].invoke[0] }
+
+    it 'is install nodebrew' do
+      subject
+      expect(HomebrewInstall).to have_received(:install_or_upgrade).with('nodebrew')
     end
   end
 
   describe 'tmux install' do
-     it 'is install tmux' do
-      expect(@rake['tmux'].invoke[0].call).to eq 'tmux'
+    subject { @rake['tmux'].invoke[0] }
+
+    it 'is install tmux' do
+      subject
+      expect(HomebrewInstall).to have_received(:install_or_upgrade).with('tmux')
     end
   end
 
@@ -309,9 +328,11 @@ describe 'Rakefile tests' do
 
     describe 'upgrade ctags' do
       describe 'ctags upgrade dependency' do
+        subject { @rake['upgrade:ctags_upgrade'].invoke[0] }
+
         it 'is dependent ctags' do
-          expect(@rake['upgrade:ctags_upgrade'].sources).to include "#{conf.ctags_home_path}"
-          expect(@rake['upgrade:ctags_upgrade'].invoke[0].call).to eq 'universal-ctags'
+          expect(subject.sources).to include "#{conf.ctags_home_path}"
+          expect(HomebrewInstall).to have_received(:upgrade).with('universal-ctags')
         end
       end
     end
