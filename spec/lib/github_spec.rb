@@ -1,10 +1,10 @@
 require './spec/base'
 
 describe "Github test" do
-  let(:github) { Githhub.new('rails/rails', protocol: 'git') }
+  let(:github) { Github.new('rails/rails', protocol: :git) }
 
-  describe "#cd" do
-    subject { github.cd('/hoge/hoge') }
+  describe "#clone_dir" do
+    subject { github.clone_dir('/hoge/hoge') }
     it { is_expected.to eq '/hoge/hoge' }
   end
 
