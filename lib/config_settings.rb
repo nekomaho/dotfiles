@@ -56,6 +56,10 @@ class ConfigSettings
     "#{@dotfiles_dir}/default.ctags"
   end
 
+  def tmux_plugin_path
+    "#{home}/.tmux/plugins/tpm"
+  end
+
   private
 
   def home

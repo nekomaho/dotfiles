@@ -3,6 +3,7 @@ require "./lib/config_settings"
 require "./lib/homebrew_install"
 require "./lib/default_shell_settings"
 require "./lib/vim_settings.rb"
+require "./lib/github.rb"
 
 conf = ConfigSettings.new
 
@@ -10,7 +11,7 @@ desc 'install all'
 task default: :install
 
 desc 'install each application'
-task :install => [:make_dir, :zsh_install, :vim_install, :ag_install, :ctags_install, :nodebrew, :tmux]
+task :install => [:make_dir, :zsh_install, :vim_install, :ag_install, :ctags_install, :nodebrew, :tmux_install]
 
 desc 'install related zsh'
 task :zsh_install => [:zsh, :zsh_completions, conf.zshrc_home_path] do
@@ -22,6 +23,9 @@ task :vim_install => [:dein]
 
 desc 'insatll related ctags'
 task :ctags_install => [:ctags, conf.ctags_home_path]
+
+desc 'insatll related tmux'
+task :tmux_install => [:tmux_plugin, :tmux]
 
 desc 'install dein that plugin of vim'
 task :dein => [:vim] do
@@ -40,6 +44,15 @@ end
 desc 'install relaated silver bullet(ag)'
 task :ag_install do
   HomebrewInstall.install_or_upgrade("the_silver_searcher")
+end
+
+desc 'install tmux-plugin'
+task :tmux_plugin  => :tmux do
+  return if Dir.exists?(conf.tmux_plugin_path)
+  Github.new('tmux-plugins/tpm').yield_self do |github|
+    github.clone_dir(conf.tmux_plugin_path)
+    github.clone
+  end
 end
 
 desc 'install tmux'
@@ -79,6 +92,7 @@ directory conf.src
 directory conf.app
 directory conf.qfixhowm_path
 directory conf.ctags_d_path
+directory conf.tmux_plugin_path
 
 file conf.zshrc_home_path => conf.zshrc_path do
   ln_s conf.zshrc_path, conf.zshrc_home_path, force: :true
@@ -122,7 +136,7 @@ file '.tmux.conf'
 
 namespace :upgrade do
   desc 'upgrade all application'
-  task :all => ["rake:make_dir", :zsh_upgrade, :vim_upgrade, "rake:ag_install", :ctags_upgrade, "rake:nodebrew", "rake:tmux"]
+  task :all => ["rake:make_dir", :zsh_upgrade, :vim_upgrade, "rake:ag_install", :ctags_upgrade, "rake:nodebrew", "rake:tmux_install"]
 
   desc 'upgrade zsh releated application'
   task :zsh_upgrade => ["rake:zsh", "rake:zsh_completions", conf.zshrc_home_path] do

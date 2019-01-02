@@ -42,7 +42,7 @@ describe 'Rakefile tests' do
         expect(@rake['install'].sources).to include 'ag_install'
         expect(@rake['install'].sources).to include 'ctags_install'
         expect(@rake['install'].sources).to include 'nodebrew'
-        expect(@rake['install'].sources).to include 'tmux'
+        expect(@rake['install'].sources).to include 'tmux_install'
       end
     end
   end
@@ -324,7 +324,7 @@ describe 'Rakefile tests' do
           expect(@rake['upgrade:all'].sources).to include 'rake:ag_install'
           expect(@rake['upgrade:all'].sources).to include 'ctags_upgrade'
           expect(@rake['upgrade:all'].sources).to include 'rake:nodebrew'
-          expect(@rake['upgrade:all'].sources).to include 'rake:tmux'
+          expect(@rake['upgrade:all'].sources).to include 'rake:tmux_install'
         end
       end
     end
