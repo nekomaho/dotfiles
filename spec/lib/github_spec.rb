@@ -17,7 +17,7 @@ describe "Github test" do
 
     it do
       subject
-      expect(github).to have_received(:sh).with('git clone git@github.com:rails/rails.git')
+      expect(github).to have_received(:sh).with('git clone git@github.com:rails/rails ')
     end
   end
 end

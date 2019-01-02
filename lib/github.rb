@@ -7,7 +7,7 @@ class Github
     @repo_name = repo_name
     case protocol
     when :ssh
-      url = 'https://github.com'
+      url = 'https://github.com/'
     when :git
       url = 'git@github.com:'
     else
@@ -23,6 +23,6 @@ class Github
   end
 
   def clone
-    sh("git clone #{url}.git")
+    sh("git clone #{url} #{@clone_dir}")
   end
 end
