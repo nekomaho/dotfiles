@@ -18,7 +18,7 @@ set termwinscroll=100000
 set incsearch
 set redrawtime=5000
 set wildmenu
-set wildmode=list
+set wildmode=list:longest,longest:full
 
 "End set config
 "Key map config
