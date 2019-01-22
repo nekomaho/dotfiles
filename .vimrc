@@ -165,7 +165,7 @@ if dein#load_state(vimbundle_path)
   call dein#add('prabirshrestha/vim-lsp')  "for lsp
   call dein#add('prabirshrestha/asyncomplete.vim')  "for auto-complete
   call dein#add('prabirshrestha/asyncomplete-lsp.vim') "autopopup for lsp auto-complete
-
+  call dein#add('kamykn/spelunker.vim')
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')
 
