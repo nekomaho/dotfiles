@@ -16,7 +16,7 @@ set norelativenumber
 set splitright
 set termwinscroll=100000
 set incsearch
-set redrawtime=5000
+set redrawtime=10000
 set wildmenu
 set wildmode=list:longest,longest:full
 
