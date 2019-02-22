@@ -19,6 +19,7 @@ set incsearch
 set redrawtime=10000
 set wildmenu
 set wildmode=list:longest,longest:full
+set re=1 " for speed up scrolling
 
 "End set config
 "Key map config
@@ -168,6 +169,9 @@ if dein#load_state(vimbundle_path)
   call dein#add('kamykn/spelunker.vim')
   call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')
+  call dein#add('Lokaltog/vim-easymotion') " easymotion plugin
+  call dein#add('itchyny/vim-parenmatch')
+  call dein#add('vim-ruby/vim-ruby') " for vim more faster
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
@@ -195,6 +199,9 @@ if dein#check_install()
 endif
 
 colorscheme hybrid
+
+" disable matchparen
+let g:loaded_matchparen = 1
 
 " vim-markdown settings
 let g:vim_markdown_new_list_item_indent = 2
