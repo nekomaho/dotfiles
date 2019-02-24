@@ -52,6 +52,9 @@ inoremap <silent> っｊ <ESC>
 " for ctags jump
 nnoremap <C-]> g<C-]>
 
+" easymotion settings
+nmap s <Plug>(easymotion-overwin-f2)
+
 " gtags key binds
 augroup gtagsKeySetting
   " <C-g> grep source code
