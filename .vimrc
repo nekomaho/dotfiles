@@ -53,7 +53,7 @@ inoremap <silent> っｊ <ESC>
 nnoremap <C-]> g<C-]>
 
 " easymotion settings
-nmap s <Plug>(easymotion-overwin-f2)
+nmap f <Plug>(easymotion-overwin-f2)
 
 " gtags key binds
 augroup gtagsKeySetting
