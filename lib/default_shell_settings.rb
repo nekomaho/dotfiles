@@ -1,4 +1,5 @@
 require 'io/console'
+require 'readline'
 
 class DefaultShellSetting
   ETC_SHELL="/etc/shells"
