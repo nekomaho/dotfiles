@@ -1,7 +1,7 @@
 require 'open3'
 require 'pry'
 
-class  HomebrewInstall
+module HomebrewInstall
   extend Rake::DSL
 
   class << self
