@@ -1,11 +1,17 @@
 # Dotfiles
-install dotfiles
-## how to install
+This is nekomaho's environment setting scripts.
+
+# Require
+- ruby
+- Homebrew
+
+# How to use
+## install packages
 ```bash
 $ bundle exec rake install
 ```
-## how to update
+## update packages
 ```bash
-$ bundle exec rake update:all
+$ bundle exec rake upgrade:all
 ```
 
