@@ -146,7 +146,6 @@ if dein#load_state(vimbundle_path)
   call dein#add('simeji/winresizer') "vim windows resize plugin
   call dein#add('vim-airline/vim-airline')  " Lean & mean status/tabline for vim that's light as air.
   call dein#add('vim-airline/vim-airline-themes')  " airline themes
-  call dein#add('rking/ag.vim')  " for silver searcher plugin
   call dein#add('justinmk/vim-dirvish')  " Path navigator
   call dein#add('vim-scripts/gtags.vim')  " gtags plugin
   call dein#add('gregsexton/gitv') "git log viewr
@@ -175,6 +174,8 @@ if dein#load_state(vimbundle_path)
   call dein#add('Lokaltog/vim-easymotion') " easymotion plugin
   call dein#add('itchyny/vim-parenmatch')
   call dein#add('vim-ruby/vim-ruby') " for vim more faster
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) " for incremental search plugin see:https://github.com/Shougo/dein.vim/issues/74#issuecomment-237198717
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
@@ -277,6 +278,16 @@ try
   call unite#filters#matcher_default#use(['matcher_fuzzy'])
 catch
 endtry
+
+"fzf settings
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:30%:wrap'))
+
+command! -bang -nargs=* Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:30%:wrap'))
+
+command! -bang -nargs=* Buffers
+  \ call fzf#vim#buffers(fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:30%:wrap'))
 
 "vim-lsp settings
 if executable('solargraph')
