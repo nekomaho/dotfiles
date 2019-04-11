@@ -2,6 +2,10 @@
 install dotfiles
 ## how to install
 ```bash
-$ ./install.sh
+$ bundle exec rake install
+```
+## how to update
+```bash
+$ bundle exec rake update:all
 ```
 
