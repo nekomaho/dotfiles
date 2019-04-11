@@ -55,6 +55,11 @@ nnoremap <C-]> g<C-]>
 " easymotion settings
 nmap f <Plug>(easymotion-overwin-f2)
 
+"fzf settings
+nnoremap Fag :Ag <CR>
+nnoremap Ff :Files <CR>
+nnoremap Fb :Buffers <CR>
+
 " gtags key binds
 augroup gtagsKeySetting
   " <C-g> grep source code
