@@ -131,6 +131,12 @@ describe 'Rakefile tests' do
   end
 
   describe 'ag install' do
+    describe 'ag install dependency' do
+      it 'is dependent .vimrc and lua' do
+        expect(@rake['ag_install'].sources).to include "#{conf.ag_ignore_home_path}"
+      end
+    end
+
     subject { @rake['ag_install'].invoke[0] }
 
     it 'is install ag' do
@@ -312,6 +318,34 @@ describe 'Rakefile tests' do
         expect(FileTest.symlink?(conf.ctags_home_path)).to be_truthy
       end
     end
+
+    describe 'copy .ag_ignore to ag_ignore_path' do
+      after do
+        File.delete(conf. ag_ignore_path)
+      end
+
+      it 'is exist .ag_ignore to ag_ignore_path' do
+        @rake[conf.ag_ignore_path].invoke
+        expect(FileTest.exist?(conf.ag_ignore_path)).to be_truthy
+      end
+    end
+
+    describe 'create symblic link to ag_ignore_home_path to ag_ignore_path' do
+      before do
+        FileUtils.touch(conf.ag_ignore_path)
+      end
+
+      after do
+        File.delete(conf.ag_ignore_home_path)
+        File.delete(conf.ag_ignore_path)
+      end
+
+      it 'is symbolic link of ag_ignore_path' do
+        @rake[conf.ag_ignore_home_path].invoke
+        expect(FileTest.symlink?(conf.ag_ignore_home_path)).to be_truthy
+      end
+    end
+
   end
 
   describe 'upgrade' do

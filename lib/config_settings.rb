@@ -60,6 +60,14 @@ class ConfigSettings
     "#{home}/.tmux/plugins/tpm"
   end
 
+  def ag_ignore_home_path
+    "#{home}/.agignore"
+  end
+
+  def ag_ignore_path
+    "#{@dotfiles_dir}/.agignore"
+  end
+
   private
 
   def home

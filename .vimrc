@@ -286,7 +286,7 @@ endtry
 
 "fzf settings
 command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:30%:wrap'))
+  \ call fzf#vim#ag(<q-args>, '--skip-vcs-ignores', fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:30%:wrap'))
 
 command! -bang -nargs=* Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:30%:wrap'))

@@ -62,4 +62,16 @@ describe "ConfigSettings test" do
       expect(config.ctags_path).to eq("#{ENV["HOME"]}/.dotfiles/default.ctags")
     end
   end
+
+  describe "#ag_ignore_home_path" do
+    it 'is return ag_ignore_home_path' do
+      expect(config.ag_ignore_home_path).to eq("#{ENV["HOME"]}/.agignore")
+    end
+  end
+
+  describe "#ag_ignore_path" do
+    it 'is return ag_ignore_path' do
+      expect(config.ag_ignore_path).to eq("#{ENV["HOME"]}/.dotfiles/.agignore")
+    end
+  end
 end

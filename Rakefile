@@ -42,7 +42,7 @@ task :vim => [conf.vimrc_home_path, :lua ] do
 end
 
 desc 'install relaated silver bullet(ag)'
-task :ag_install do
+task :ag_install => [conf.ag_ignore_home_path] do
   HomebrewInstall.install_or_upgrade("the_silver_searcher")
 end
 
@@ -134,6 +134,17 @@ file conf.tmux_conf_path => '.tmux.conf' do
 end
 
 file '.tmux.conf'
+
+file conf.ag_ignore_home_path => conf.ag_ignore_path do
+  ln_s conf.ag_ignore_path, conf.ag_ignore_home_path, force: :true
+end
+
+file conf.ag_ignore_path => '.agignore' do
+  cp '.agignore', conf.ag_ignore_path
+end
+
+file '.agignore'
+
 
 namespace :upgrade do
   desc 'upgrade all application'

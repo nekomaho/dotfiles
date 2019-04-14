@@ -1,0 +1,7 @@
+*.swp
+*.bak
+*.old
+*.log
+tmp
+.git
+.svn
