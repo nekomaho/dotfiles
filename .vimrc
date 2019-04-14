@@ -285,14 +285,15 @@ catch
 endtry
 
 "fzf settings
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, '--skip-vcs-ignores', fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:30%:wrap'))
+  \ call fzf#vim#ag(<q-args>, '--skip-vcs-ignores', {'options': '--exact --reverse'})
 
 command! -bang -nargs=* Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:30%:wrap'))
 
 command! -bang -nargs=* Buffers
-  \ call fzf#vim#buffers(fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:30%:wrap'))
+  \ call fzf#vim#buffers({'options': '--exact --reverse'})
 
 "vim-lsp settings
 if executable('solargraph')
