@@ -1,6 +1,7 @@
 require "pry"
 require "./lib/config_settings"
 require "./lib/homebrew_install"
+require "./lib/homebrew/homebrew_task_generator"
 require "./lib/default_shell_settings"
 require "./lib/vim_settings.rb"
 require "./lib/github.rb"
@@ -9,6 +10,13 @@ conf = ConfigSettings.new
 
 desc 'install all'
 task default: :install
+
+desc 'brew'
+task :brew do
+  HomebrewInstall::HomebrewTaskGenerator.load.tap do |brew_app|
+    brew_app.install_or_upgrade
+  end
+end
 
 desc 'install each application'
 task :install => [:make_dir, :zsh_install, :vim_install, :ag_install, :ctags_install, :nodebrew, :tmux_install]

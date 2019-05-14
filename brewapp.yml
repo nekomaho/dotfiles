@@ -1,3 +1,2 @@
-vim:
 zsh:
 'universal-ctags':  { install_name: "--HEAD universal-ctags/universal-ctags/universal-ctags" }
