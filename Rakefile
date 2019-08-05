@@ -43,7 +43,6 @@ end
 
 desc 'install relaated silver bullet(ag)'
 task :ag_install => [conf.ag_ignore_home_path] do
-  HomebrewInstall.install_or_upgrade("the_silver_searcher")
 end
 
 desc 'install tmux-plugin'
@@ -58,32 +57,26 @@ end
 
 desc 'install tmux'
 task :tmux  => [conf.tmux_home_path ] do
-  HomebrewInstall.install_or_upgrade("tmux")
 end
 
 desc 'install nodebrew'
 task :nodebrew do
-  HomebrewInstall.install_or_upgrade("nodebrew")
 end
 
 desc 'install lua that need vim'
 task :lua do
-  HomebrewInstall.install_or_upgrade("lua")
 end
 
 desc 'install zsh'
 task :zsh do
-  HomebrewInstall.install_or_upgrade("zsh")
 end
 
 desc 'install zsh_completions'
 task :zsh_completions do
-  HomebrewInstall.install_or_upgrade("zsh-completions")
 end
 
 desc 'insall ctags that source code tagging system'
 task :ctags do
-  HomebrewInstall.install("universal-ctags", options: { install_name: "--HEAD universal-ctags/universal-ctags/universal-ctags" })
 end
 
 desc 'make need directory'
@@ -160,7 +153,6 @@ namespace :upgrade do
 
   desc 'upgrade ctags application'
   task :ctags_upgrade => [conf.ctags_home_path] do
-    HomebrewInstall.upgrade("universal-ctags")
   end
 
   desc 'upgrade dein that plugin of vim'
