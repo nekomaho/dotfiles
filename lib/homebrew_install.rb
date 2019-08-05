@@ -2,8 +2,6 @@ require 'open3'
 require 'pry'
 
 module HomebrewInstall
-  extend Rake::DSL
-
   class << self
     def install(app, options: {})
       install_name = options.fetch(:install_name, nil)
