@@ -11,7 +11,7 @@ desc 'install all'
 task default: :install
 
 desc 'install each application'
-task :install => [:make_dir, :zsh_install, :vim_install, :ag_install, :ctags_install, :nodebrew, :tmux_install]
+task :install => [:zsh_install, :vim_install, :ag_install, :ctags_install, :nodebrew, :tmux_install]
 
 desc 'install related zsh'
 task :zsh_install => [:zsh, :zsh_completions, conf.zshrc_home_path] do
@@ -79,62 +79,33 @@ desc 'insall ctags that source code tagging system'
 task :ctags do
 end
 
-desc 'make need directory'
-task :make_dir => [conf.dotfiles_dir, conf.src, conf.app, conf.qfixhowm_path, conf.ctags_d_path]
-directory conf.dotfiles_dir
-directory conf.src
-directory conf.app
-directory conf.qfixhowm_path
-directory conf.ctags_d_path
-directory conf.tmux_plugin_path
+file conf.zshrc_home_path => conf.zshrc_path
 
-file conf.zshrc_home_path => conf.zshrc_path do
-  ln_s conf.zshrc_path, conf.zshrc_home_path, force: :true
-end
-
-file conf.zshrc_path => '.zshrc' do
-  cp '.zshrc', conf.zshrc_path
-end
+file conf.zshrc_path => '.zshrc'
 
 file '.zshrc'
 
-file conf.vimrc_home_path => conf.vimrc_path do
-  ln_s conf.vimrc_path, conf.vimrc_home_path, force: :true
-end
+file conf.vimrc_home_path => conf.vimrc_path
 
-file conf.vimrc_path => '.vimrc' do
-  cp '.vimrc', conf.vimrc_path
-end
+file conf.vimrc_path => '.vimrc'
 
 file '.vimrc'
 
-file conf.ctags_home_path => conf.ctags_path do
-  ln_s conf.ctags_path, conf.ctags_home_path, force: :true
-end
+file conf.ctags_home_path => conf.ctags_path
 
-file conf.ctags_path => 'default.ctags' do
-  cp 'default.ctags', conf.ctags_path
-end
+file conf.ctags_path => 'default.ctags'
 
 file 'default.ctags'
 
-file conf.tmux_home_path => conf.tmux_conf_path do
-  ln_s conf.tmux_conf_path, conf.tmux_home_path, force: :true
-end
+file conf.tmux_home_path => conf.tmux_conf_path
 
-file conf.tmux_conf_path => '.tmux.conf' do
-  cp '.tmux.conf', conf.tmux_conf_path
-end
+file conf.tmux_conf_path => '.tmux.conf'
 
 file '.tmux.conf'
 
-file conf.ag_ignore_home_path => conf.ag_ignore_path do
-  ln_s conf.ag_ignore_path, conf.ag_ignore_home_path, force: :true
-end
+file conf.ag_ignore_home_path => conf.ag_ignore_path
 
 file conf.ag_ignore_path => '.agignore' do
-  cp '.agignore', conf.ag_ignore_path
-end
 
 file '.agignore'
 
