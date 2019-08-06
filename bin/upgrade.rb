@@ -3,7 +3,7 @@ require 'thor'
 require "./lib/homebrew_install"
 require "./lib/homebrew/brewapp"
 
-class Upgrade < Thor
+class UpgradeCLI < Thor
   package_name "Upgrade .files"
 
   desc 'brew_install app_name' ,'install brew applications'
@@ -17,4 +17,4 @@ class Upgrade < Thor
   end
 end
 
-Upgrade.start
+UpgradeCLI.start
