@@ -29,16 +29,10 @@ task :tmux_install => [:tmux_plugin, :tmux]
 
 desc 'install dein that plugin of vim'
 task :dein => [:vim] do
-  VimInstall.dein(conf.dotfiles_dir,conf.app)
 end
 
 desc 'install vim'
 task :vim => [conf.vimrc_home_path, :lua ] do
-  if File.exists?(conf.vim_clone_path)
-    VimInstall.update(conf.vim_clone_path,conf.app)
-  else
-    VimInstall.build(conf.vim_clone_path,conf.app)
-  end
 end
 
 desc 'install relaated silver bullet(ag)'
@@ -128,15 +122,9 @@ namespace :upgrade do
 
   desc 'upgrade dein that plugin of vim'
   task :dein_upgrade => [:vim] do
-    VimInstall.dein(conf.dotfiles_dir,conf.app)
   end
 
   desc 'upgrade vim releated application'
   task :vim => [conf.vimrc_home_path, "rake:lua" ] do
-    if File.exists?(conf.vim_clone_path)
-      VimInstall.update(conf.vim_clone_path,conf.app)
-    else
-      VimInstall.build(conf.vim_clone_path,conf.app)
-    end
   end
 end

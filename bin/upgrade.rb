@@ -3,6 +3,7 @@ require 'thor'
 require "./lib/homebrew_install"
 require "./lib/homebrew/brewapp"
 require "./lib/file/file"
+require "./lib/vim/vim"
 
 class UpgradeCLI < Thor
   package_name "Upgrade .files"
@@ -10,12 +11,14 @@ class UpgradeCLI < Thor
   desc 'install' ,'install all applications'
   def install
     before_actions
+    vim_make
     brew_install
   end
 
   desc 'update' ,'update all applications'
   def update
     before_actions
+    vim_make
     brew_update
   end
 
@@ -27,6 +30,11 @@ class UpgradeCLI < Thor
   desc 'brew_update app_name' ,'update brew applications'
   def brew_update(app=nil)
     Homebrew::BrewAppUpdater.setup(app)
+  end
+
+  desc 'vim_make' ,'install and update vim'
+  def vim_make
+    Vim::Installer.make
   end
 
   private
