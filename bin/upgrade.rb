@@ -4,6 +4,7 @@ require "./lib/homebrew_install"
 require "./lib/homebrew/brewapp"
 require "./lib/file/file"
 require "./lib/vim/vim"
+require "./lib/tmux/plugin"
 
 class UpgradeCLI < Thor
   package_name "Upgrade .files"
@@ -13,6 +14,7 @@ class UpgradeCLI < Thor
     before_actions
     vim_make
     brew_install
+    after_actions
   end
 
   desc 'update' ,'update all applications'
@@ -20,6 +22,7 @@ class UpgradeCLI < Thor
     before_actions
     vim_make
     brew_update
+    after_actions
   end
 
   desc 'brew_install app_name' ,'install brew applications'
@@ -42,6 +45,10 @@ class UpgradeCLI < Thor
   def before_actions
     Files::DirectoryCreator.create!
     Files::FileCopier.copy!
+  end
+
+  def after_actions
+    Tmux::PluginInstaller.setup
   end
 end
 

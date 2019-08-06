@@ -1,6 +1,4 @@
 class Github
-  include Rake::DSL
-
   attr_reader :repo_name, :url, :clone_dir
 
   def initialize(repo_name, protocol: :ssh, clone_dir: '')
@@ -23,6 +21,6 @@ class Github
   end
 
   def clone
-    sh("git clone #{url} #{@clone_dir}")
+    exec("git clone #{url} #{@clone_dir}")
   end
 end

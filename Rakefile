@@ -41,12 +41,6 @@ end
 
 desc 'install tmux-plugin'
 task :tmux_plugin  => :tmux do
-  unless Dir.exists?(conf.tmux_plugin_path)
-    Github.new('tmux-plugins/tpm').yield_self do |github|
-      github.clone_dir(conf.tmux_plugin_path)
-      github.clone
-    end
-  end
 end
 
 desc 'install tmux'
