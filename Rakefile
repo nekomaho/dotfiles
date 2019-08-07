@@ -15,7 +15,6 @@ task :install => [:zsh_install, :vim_install, :ag_install, :ctags_install, :node
 
 desc 'install related zsh'
 task :zsh_install => [:zsh, :zsh_completions, conf.zshrc_home_path] do
-  DefaultShellSetting.setting(conf.zsh_install_path)
 end
 
 desc 'insatll releated vim'
@@ -104,7 +103,6 @@ namespace :upgrade do
 
   desc 'upgrade zsh releated application'
   task :zsh_upgrade => ["rake:zsh", "rake:zsh_completions", conf.zshrc_home_path] do
-    DefaultShellSetting.setting(conf.zsh_install_path)
   end
 
   desc 'upgrade vim releated application'

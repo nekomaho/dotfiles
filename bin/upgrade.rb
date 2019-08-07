@@ -5,6 +5,7 @@ require "./lib/homebrew/brewapp"
 require "./lib/file/file"
 require "./lib/vim/vim"
 require "./lib/tmux/plugin"
+require "./lib/zsh/shell_setting"
 
 class UpgradeCLI < Thor
   package_name "Upgrade .files"
@@ -49,6 +50,7 @@ class UpgradeCLI < Thor
 
   def after_actions
     Tmux::PluginInstaller.setup
+    Zsh::ShellSetting.set!
   end
 end
 
