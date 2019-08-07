@@ -8,8 +8,8 @@ class  VimInstall
   DEIN_GIT_URL='https://github.com/Shougo/dein.vim'
 
   def self.build(clone_path, app_path)
-    exec("git clone #{VIM_GIT_URL} #{clone_path}")
-    current_path = pwd
+    system("git clone #{VIM_GIT_URL} #{clone_path}")
+    current_path = FileUtils.pwd
     FileUtils.cd clone_path
     vim_make(app_path)
     FileUtils.cd current_path
@@ -17,17 +17,17 @@ class  VimInstall
   end
  
   def self.install(clone_path)
-    current_path = pwd
-    cd clone_path
+    current_path = FileUtils.pwd
+    FileUtils.cd clone_path
     make_install
-    cd current_path
+    FileUtils.cd current_path
   end
 
   def self.test(clone_path)
-    current_path = pwd
-    cd clone_path
+    current_path = FileUtils.pwd
+    FileUtils.cd clone_path
     make_test
-    cd current_path
+    FileUtils.cd current_path
   end
 
   def self.update(clone_path, app_path)
@@ -52,7 +52,7 @@ class  VimInstall
       git_pull_with_already_up_to_date_check
       FileUtils.cd current_path
     else
-      exec("git clone #{DEIN_GIT_URL} #{dein_clone_path}")
+      system("git clone #{DEIN_GIT_URL} #{dein_clone_path}")
     end
   end
 

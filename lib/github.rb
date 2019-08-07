@@ -21,6 +21,6 @@ class Github
   end
 
   def clone
-    exec("git clone #{url} #{@clone_dir}")
+    system("git clone #{url} #{@clone_dir}")
   end
 end
