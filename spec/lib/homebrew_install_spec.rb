@@ -6,13 +6,13 @@ describe 'Homebrew install tests' do
  
     context "when need install" do
       before do
-        allow(HomebrewInstall).to receive(:sh)
+        allow(HomebrewInstall).to receive(:system)
         allow(HomebrewInstall).to receive(:check).and_return(true)
       end
 
       it do
         subject
-        expect(HomebrewInstall).to have_received(:sh).with('brew install dummy')
+        expect(HomebrewInstall).to have_received(:system).with('brew install dummy')
       end
     end
 
@@ -54,13 +54,13 @@ describe 'Homebrew install tests' do
 
     context "when need upgrade" do
       before do
-        allow(HomebrewInstall).to receive(:sh)
+        allow(HomebrewInstall).to receive(:system)
         allow(HomebrewInstall).to receive(:upgrade_check).and_return(true)
       end
 
       it do
         subject
-        expect(HomebrewInstall).to have_received(:sh).with('brew upgrade dummy')
+        expect(HomebrewInstall).to have_received(:system).with('brew upgrade dummy')
       end
     end
 

@@ -3,7 +3,7 @@ require './spec/base'
 describe "SrcInstall test" do
   before do
     extend SrcInstall
-    def sh(command)
+    def system(command)
       command
     end
   end
