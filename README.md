@@ -8,10 +8,10 @@ This is nekomaho's environment setting scripts.
 # How to use
 ## install packages
 ```bash
-$ bundle exec rake install
+$ bundle exec bin/setting install
 ```
 ## update packages
 ```bash
-$ bundle exec rake upgrade:all
+$ bundle exec bin/setting update
 ```
 
