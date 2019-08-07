@@ -12,7 +12,7 @@ describe "Github test" do
     subject { github.clone }
 
     before do
-      allow(github).to receive(:sh)
+      allow(github).to receive(:system)
     end
 
     context "when direct clone_dir" do
@@ -20,7 +20,7 @@ describe "Github test" do
 
       it do
         subject
-        expect(github).to have_received(:sh).with('git clone https://github.com/rails/rails /hoge/hoge')
+        expect(github).to have_received(:system).with('git clone https://github.com/rails/rails /hoge/hoge')
       end
     end
 
@@ -29,7 +29,7 @@ describe "Github test" do
 
       it do
         subject
-        expect(github).to have_received(:sh).with('git clone git@github.com:rails/rails ')
+        expect(github).to have_received(:system).with('git clone git@github.com:rails/rails ')
       end
     end
   end

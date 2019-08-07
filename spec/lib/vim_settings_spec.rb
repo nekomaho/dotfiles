@@ -5,14 +5,14 @@ describe 'VimInstall tests' do
     subject(:build) {VimInstall.build('/vim/clone/path', '/vim/app/path')}
 
     before do
-      allow(VimInstall).to receive(:sh)
-      allow(VimInstall).to receive(:cd)
+      allow(VimInstall).to receive(:system)
+      allow(FileUtils).to receive(:cd)
       allow(VimInstall).to receive(:vim_make)
     end
 
     it do
       subject
-      expect(VimInstall).to have_received(:sh).with('git clone https://github.com/vim/vim.git /vim/clone/path')
+      expect(VimInstall).to have_received(:system).with('git clone https://github.com/vim/vim.git /vim/clone/path')
       expect(VimInstall).to have_received(:vim_make).with('/vim/app/path')
     end
   end
@@ -21,13 +21,13 @@ describe 'VimInstall tests' do
     subject(:install) {VimInstall.install('/vim/clone/path')}
 
     before do
-      allow(VimInstall).to receive(:cd)
+      allow(FileUtils).to receive(:cd)
       allow(VimInstall).to receive(:make_install)
     end
 
     it do
       subject
-      expect(VimInstall).to have_received(:cd).with('/vim/clone/path')
+      expect(FileUtils).to have_received(:cd).with('/vim/clone/path')
       expect(VimInstall).to have_received(:make_install)
     end
   end
@@ -36,13 +36,13 @@ describe 'VimInstall tests' do
     subject(:install) {VimInstall.test('/vim/clone/path')}
 
     before do
-      allow(VimInstall).to receive(:cd)
+      allow(FileUtils).to receive(:cd)
       allow(VimInstall).to receive(:make_test)
     end
 
     it do
       subject
-      expect(VimInstall).to have_received(:cd).with('/vim/clone/path')
+      expect(FileUtils).to have_received(:cd).with('/vim/clone/path')
       expect(VimInstall).to have_received(:make_test)
     end
   end
@@ -53,8 +53,8 @@ describe 'VimInstall tests' do
 
     context "when newer version exists" do
       before do
-        allow(VimInstall).to receive(:cd)
-        allow(VimInstall).to receive(:sh)
+        allow(FileUtils).to receive(:cd)
+        allow(VimInstall).to receive(:system)
         allow(VimInstall).to receive(:make_clean)
         allow(VimInstall).to receive(:vim_make)
         allow(Open3).to receive(:capture3).and_return(['remote: Enumerating objects: 1, done.'])
@@ -75,14 +75,14 @@ describe 'VimInstall tests' do
     context "when dein exists already" do
       before do
         allow(File).to receive(:exists?).and_return(true)
-        allow(VimInstall).to receive(:cd)
-        allow(VimInstall).to receive(:sh)
+        allow(FileUtils).to receive(:cd)
+        allow(VimInstall).to receive(:system)
         allow(Open3).to receive(:capture3).and_return(['remote: Enumerating objects: 1, done.'])
       end
 
       it do
         subject
-        expect(VimInstall).to have_received(:cd).with('/vim/clone/path/dein')
+        expect(FileUtils).to have_received(:cd).with('/vim/clone/path/dein')
         expect(Open3).to have_received(:capture3).with('git pull')
       end
     end
@@ -90,12 +90,12 @@ describe 'VimInstall tests' do
     context "when dein isn't exists" do
       before do
         allow(File).to receive(:exists?).and_return(false)
-        allow(VimInstall).to receive(:sh)
+        allow(VimInstall).to receive(:system)
       end
 
       it do
         subject
-        expect(VimInstall).to have_received(:sh).with('git clone https://github.com/Shougo/dein.vim /vim/clone/path/dein')
+        expect(VimInstall).to have_received(:system).with('git clone https://github.com/Shougo/dein.vim /vim/clone/path/dein')
       end
     end
   end
