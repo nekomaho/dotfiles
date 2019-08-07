@@ -35,7 +35,6 @@ GEM
     pry-doc (1.0.0)
       pry (~> 0.11)
       yard (~> 0.9.11)
-    rake (12.3.3)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
@@ -66,7 +65,6 @@ DEPENDENCIES
   guard-rspec
   pry
   pry-doc
-  rake
   rb-readline
   rspec
   thor
