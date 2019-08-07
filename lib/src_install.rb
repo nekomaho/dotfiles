@@ -2,22 +2,22 @@ require 'fileutils'
 
 module SrcInstall
   def make
-    exec("make")
+    system('make')
   end
 
   def make_test
-    exec("make test")
+    system('make test')
   end
 
   def make_install
-    exec("make install")
+    system("make install")
   end
 
   def make_clean
-    exec("make clean")
+    system("make clean")
   end
 
   def configure(option)
-    exec("./configure #{option}")
+    system("./configure #{option}")
   end
 end

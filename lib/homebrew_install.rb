@@ -7,7 +7,7 @@ module HomebrewInstall
       install_name = options.fetch(:install_name, nil)
       install_name = app if install_name.nil?
       Bundler.with_original_env do
-        return sh("brew install #{install_name}") if check(app)
+        return system("brew install #{install_name}") if check(app)
         puts("skip install #{app}")
       end
     end
@@ -20,7 +20,7 @@ module HomebrewInstall
 
     def upgrade(app)
       Bundler.with_original_env do
-        return sh("brew upgrade #{app}") if upgrade_check(app)
+        return system("brew upgrade #{app}") if upgrade_check(app)
         puts("skip upgrade #{app}")
       end
     end
