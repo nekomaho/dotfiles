@@ -1,5 +1,4 @@
 require 'fileutils'
-require "./lib/config_settings"
 
 module Files
   HOME = "#{ENV["HOME"]}".freeze
