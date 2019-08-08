@@ -7,6 +7,8 @@ module Homebrew
       :tmux,
       :nodebrew,
       :lua,
+      :fzf,
+      :git,
       :zsh,
       :zsh_completions,
       :universal_ctags,
