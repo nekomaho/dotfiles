@@ -10,11 +10,11 @@ module SrcInstall
   end
 
   def make_install
-    system("make install")
+    system('make install')
   end
 
   def make_clean
-    system("make clean")
+    system('make clean')
   end
 
   def configure(option)
