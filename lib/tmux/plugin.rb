@@ -1,4 +1,4 @@
-require "./lib/file/file"
+require "./lib/setting_dir"
 
 module Tmux
   class PluginInstaller
@@ -9,10 +9,10 @@ module Tmux
     end
 
     def setup
-      unless Dir.exists?(Files::DirectoryCreator::DIRS[:tmux_plugin_path])
+      unless Dir.exists?(SettingDir::DIRS[:tmux_plugin_path])
         puts 'stup tmux plugin'
         Github.new('tmux-plugins/tpm').yield_self do |github|
-          github.clone_dir(Files::DirectoryCreator::DIRS[:tmux_plugin_path])
+          github.clone_dir(SettingDir::DIRS[:tmux_plugin_path])
           github.clone
         end
       end

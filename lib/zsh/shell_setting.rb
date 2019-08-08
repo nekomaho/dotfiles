@@ -1,4 +1,3 @@
-require "./lib/file/file"
 require "./lib/default_shell_settings"
 
 module Zsh
