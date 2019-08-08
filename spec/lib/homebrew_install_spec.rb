@@ -97,6 +97,23 @@ describe 'Homebrew install tests' do
     end
   end
 
+  describe "#update" do
+    subject(:updatee){ HomebrewInstall.update }
+
+    context "when need upgrade" do
+      before do
+        allow(HomebrewInstall).to receive(:puts)
+        allow(HomebrewInstall).to receive(:system)
+      end
+
+      it do
+        subject
+        expect(HomebrewInstall).to have_received(:puts).with('brew update')
+        expect(HomebrewInstall).to have_received(:system).with('brew update')
+      end
+    end
+  end
+
   describe "#install_or_upgrade" do
     subject(:install_or_upgrade) { HomebrewInstall.install_or_upgrade('dummy') }
 
