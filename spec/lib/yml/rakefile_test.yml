@@ -1,3 +1,0 @@
-ZSH_INSTALL_PATH: spec/tmp/bin/zsh
-VIM_INSTALL_PATH: spec/tmp/bin/vim
-DOTFILE_PATH: .dotfiles
