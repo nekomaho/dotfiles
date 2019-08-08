@@ -26,6 +26,7 @@ module Homebrew
 
   class BrewAppInstaller < BrewAppStrategy
     def setup(app)
+      HomebrewInstall.update
       (app.nil? ? INSTALL_APP : app.to_sym).each do |install_app|
         case install_app
         when :universal_ctags
@@ -43,6 +44,7 @@ module Homebrew
 
   class BrewAppUpdater < BrewAppStrategy
     def setup(app)
+      HomebrewInstall.update
       (app.nil? ? INSTALL_APP : app.to_sym).each do |install_app|
         HomebrewInstall.install_or_upgrade(install_app)
       end

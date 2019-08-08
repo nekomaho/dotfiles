@@ -31,6 +31,13 @@ module HomebrewInstall
       end
     end
 
+    def update
+      Bundler.with_original_env do
+        puts('brew update')
+        system('brew update')
+      end
+    end
+
     def install_or_upgrade(app)
       install(app)
       upgrade(app)
