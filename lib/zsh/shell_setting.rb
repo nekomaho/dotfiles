@@ -1,7 +1,8 @@
 require "./lib/default_shell_settings"
 
 module Zsh
-  ZSH_INSTALL_PATH='/usr/local/bin/zsh'
+  ZSH_INSTALL_PATH='/usr/local/bin/zsh'.freeze
+
   class ShellSetting
     class << self
       def set!
