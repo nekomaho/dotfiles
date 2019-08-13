@@ -45,6 +45,15 @@ class  VimInstall
       install(clone_path)
     end
 
+    def force_update(clone_path, app_path)
+      current_path = FileUtils.pwd
+      FileUtils.cd clone_path
+      make_clean
+      vim_make(app_path)
+      FileUtils.cd current_path
+      install(clone_path)
+    end
+
     def dein(clone_path, app_path)
       dein_clone_path =  clone_path+'/dein'
       if File.exists?(dein_clone_path)
