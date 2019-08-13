@@ -6,20 +6,26 @@ class Vim
 
   class Installer
     class << self
-      def make
-        new.make
+      def make(force: false)
+        new.make(force: force)
       end
     end
 
-    def make
+    def make(force:)
       puts 'install dein'
       VimInstall.dein(SettingDir::DIRS[:dotfiles_dir], SettingDir::DIRS[:app])
       if need_build?
         puts 'vim build'
         VimInstall.build(VIM_CLONE_PATH, SettingDir::DIRS[:app])
       else
-        puts 'vim update'
-        VimInstall.update(VIM_CLONE_PATH, SettingDir::DIRS[:app])
+        case force
+        when true
+          puts 'vim update'
+          VimInstall.force_update(VIM_CLONE_PATH, SettingDir::DIRS[:app])
+        when false
+          puts 'vim update'
+          VimInstall.update(VIM_CLONE_PATH, SettingDir::DIRS[:app])
+        end
       end
     end
 

@@ -37,8 +37,13 @@ class SettingCLI < Thor
   end
 
   desc 'vim_make' ,'install and update vim'
+  method_option :force
   def vim_make
-    Vim::Installer.make
+    if options.force
+      Vim::Installer.make(force: true)
+    else
+      Vim::Installer.make
+    end
   end
 
   private
