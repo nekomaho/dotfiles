@@ -58,6 +58,7 @@ describe 'VimInstall tests' do
         allow(VimInstall).to receive(:make_clean)
         allow(VimInstall).to receive(:vim_make)
         allow(Open3).to receive(:capture3).and_return(['remote: Enumerating objects: 1, done.'])
+        allow(VimInstall).to receive(:make_install)
       end
 
       it do
@@ -65,6 +66,28 @@ describe 'VimInstall tests' do
         expect(Open3).to have_received(:capture3).with('git pull')
         expect(VimInstall).to have_received(:make_clean)
         expect(VimInstall).to have_received(:vim_make).with('/vim/app/path')
+        expect(VimInstall).to have_received(:make_install)
+      end
+    end
+  end
+
+  describe "#force_update" do
+    subject(:update) {VimInstall.force_update('/vim/clone/path', '/vim/app/path')}
+
+    context "when newer version exists" do
+      before do
+        allow(FileUtils).to receive(:cd)
+        allow(VimInstall).to receive(:system)
+        allow(VimInstall).to receive(:make_clean)
+        allow(VimInstall).to receive(:vim_make)
+        allow(VimInstall).to receive(:make_install)
+      end
+
+      it do
+        subject
+        expect(VimInstall).to have_received(:make_clean)
+        expect(VimInstall).to have_received(:vim_make).with('/vim/app/path')
+        expect(VimInstall).to have_received(:make_install)
       end
     end
   end
