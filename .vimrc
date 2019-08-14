@@ -163,7 +163,6 @@ if dein#load_state(vimbundle_path)
   call dein#add('kchmck/vim-coffee-script') " coffee script syntax highlight
   call dein#add('pangloss/vim-javascript') "javascript indent
   call dein#add('maxmellon/vim-jsx-pretty') " jsx syntax highlight
-  call dein#add('marijnh/tern_for_vim') " js auto complete
   call dein#add('othree/javascript-libraries-syntax.vim') "JS library syntax
   call dein#add('tyru/open-browser-github.vim') " for open github
   call dein#add('tyru/open-browser.vim') " for open github
