@@ -6,6 +6,4 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry'
   gem 'rspec'
-  gem 'guard'
-  gem 'guard-rspec'
 end
