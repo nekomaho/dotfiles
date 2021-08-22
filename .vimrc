@@ -173,7 +173,6 @@ if dein#load_state(vimbundle_path)
   call dein#add('prabirshrestha/asyncomplete.vim')  "for auto-complete
   call dein#add('prabirshrestha/asyncomplete-lsp.vim') "autopopup for lsp auto-complete
   call dein#add('kamykn/spelunker.vim') "plugin that improved Vim's spell checking function.
-  call dein#add('fuenor/qfixhowm') " hownm tool of vim
   call dein#add('soramugi/auto-ctags.vim')
   call dein#add('Lokaltog/vim-easymotion') " easymotion plugin
   call dein#add('itchyny/vim-parenmatch')
@@ -240,17 +239,6 @@ let g:airline_extensions = []
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = 'minimalist'
 let g:airline_highlighting_cache = 1
-
-" QFixHowm settings
-let hown_dir = '~/.qfixhowm'
-let hown_fileencoding = 'utf-8'
-let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.md'
-let hown_fileformat = 'unix'
-let QFixHowm_UserFileType = 'markdown'
-let QFixHowm_UserFileExt= 'md'
-let QFixHowm_Title = '#'
-" display QFixHowm list
-nnoremap <silent> ssj :<C-U>call qfixmemo#Glob(g:qfixmemo_dir, "**/*", "open")<CR>
 
 "End dein Scripts-------------------------
 
