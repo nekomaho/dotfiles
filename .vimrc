@@ -199,6 +199,8 @@ syntax enable
 " ---For fern
 let g:fern#renderer = "nerdfont"
 let g:fern#default_hidden = 1
+let g:fern#renderer#nerdfont#indent_markers = 0
+let g:indent_guides_exclude_filetypes = ['fern']
 nnoremap <C-w> :<C-u>Fern . -keep -drawer -toggle -reveal=% -width=50<CR>
 " back to terminal mode with Esc key
 tnoremap <Esc> <C-\><C-n>
@@ -339,6 +341,12 @@ augroup my-glyph-palette
   autocmd FileType fern call glyph_palette#apply()
   autocmd FileType fall-list call glyph_palette#apply()
   autocmd FileType nerdtree,startify call glyph_palette#apply()
+augroup END
+
+" settings for remove number display for directory pain
+augroup my_fern_settings
+  autocmd!
+  autocmd FileType fern call timer_start(0, { -> execute('setlocal signcolumn=no nonumber norelativenumber foldcolumn=0') })
 augroup END
 
 syntax sync minlines=256
