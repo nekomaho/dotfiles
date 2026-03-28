@@ -135,6 +135,10 @@ if dein#load_state(vimbundle_path)
   call dein#add(dein_vim_path)
 
   " Add or remove your plugins here:
+  call dein#add('lambdalisue/vim-fern')
+  call dein#add('lambdalisue/fern-renderer-nerdfont.vim')
+  call dein#add('lambdalisue/nerdfont.vim') " icon for directory
+  call dein#add('lambdalisue/vim-glyph-palette')
   call dein#add('w0ng/vim-hybrid')
   call dein#add('tpope/vim-fugitive')  "git wrapper
   call dein#add('nathanaelkane/vim-indent-guides') "display indent levels
@@ -191,6 +195,16 @@ endif
 " Required:
 filetype plugin indent on
 syntax enable
+
+" ---For fern
+let g:fern#renderer = "nerdfont"
+let g:fern#default_hidden = 1
+nnoremap <C-w> :<C-u>Fern . -keep -drawer -toggle -reveal=% -width=50<CR>
+" back to terminal mode with Esc key
+tnoremap <Esc> <C-\><C-n>
+" execute terminal
+nnoremap <C-m> :botright terminal ++rows=10<CR>
+
 
 " Dictionary setting
 autocmd FileType ruby :set dictionary='~/.dotfiles/dict/ruby/dicts'
@@ -318,5 +332,13 @@ let g:lsp_async_completion = 0
 let g:asyncomplete_smart_completion = 1
 let g:asyncomplete_auto_popup = 1
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" For displaying icon of fern
+augroup my-glyph-palette
+  autocmd! *
+  autocmd FileType fern call glyph_palette#apply()
+  autocmd FileType fall-list call glyph_palette#apply()
+  autocmd FileType nerdtree,startify call glyph_palette#apply()
+augroup END
 
 syntax sync minlines=256
